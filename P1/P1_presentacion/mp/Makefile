@@ -1,6 +1,6 @@
 ############################
-# Práctica 1 			   #
-# file: Makefile		   #
+# Práctica 1               #
+# file: Makefile           #
 # Pedro Velasco Santana    #
 ############################
 
