@@ -1,3 +1,9 @@
+////////////////////////////////
+// Práctica 1                 //
+// file: src/demo.cpp         //
+// Pedro Velasco Santana      //
+////////////////////////////////
+
 #include <iostream>
 
 double suma (double a, double b){
