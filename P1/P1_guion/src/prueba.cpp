@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "contenedor.h"
-#include "paquete.h"
+#include "../include/contenedor.h"
+#include "../include/paquete.h"
 
 using namespace std;
 
