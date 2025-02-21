@@ -9,10 +9,12 @@
 #ifndef PAQUETE_H
 #define PAQUETE_H
 
-struct paquete;
+#include <string>
 
-String toString(const paquete p); //Por q da error el string. Mirar formato en pdf
-paquete creaPaquete(const int origen, const int destino, const int peso);
-bool esValido(const paquete p);
+struct Paquete;
+
+string toString(const Paquete p); //Por q da error el string. Mirar formato en pdf
+Paquete creaPaquete(const int origen, const int destino, const int peso);
+bool esValido(const Paquete p);
 
 #endif
