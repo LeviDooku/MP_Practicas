@@ -9,8 +9,6 @@
 #ifndef PAQUETE_H
 #define PAQUETE_H
 
-#include <string>
-
 struct Paquete;
 
 string toString(const Paquete p); //Por q da error el string. Mirar formato en pdf
