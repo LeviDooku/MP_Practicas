@@ -9,7 +9,14 @@
 #ifndef PAQUETE_H
 #define PAQUETE_H
 
-struct Paquete;
+#include <string>
+using namespace std;
+
+struct Paquete{
+    int origen;
+    int destino;
+    int peso;
+};
 
 string toString(const Paquete p); //Por q da error el string. Mirar formato en pdf
 Paquete creaPaquete(const int origen, const int destino, const int peso);

@@ -34,16 +34,16 @@ int main() {
     cout << "\n ******** Prueba enviosDestino ******** \n";
     cout << "Datos de envios a los destinos 1 y 4\n";
     int nro;
-    enviosDestino(c1, 1, nro, peso);
+    //enviosDestino(c1, 1, nro, peso);
     cout << "Destino: " << 1 << " Paquetes: " << nro << " Peso: " << peso << endl;
-    enviosDestino(c1, 4, nro, peso);
+    //enviosDestino(c1, 4, nro, peso);
     cout << "Destino: " << 4 << " Paquetes: " << nro << " Peso: " << peso << endl;
 
 
 
     cout << "\n ******** Prueba obtienePaquetes ******** \n";
     cout << "Paquetes con origen = 4\n";
-    otro = obtienePaquetes(c1, 4);
+    //otro = obtienePaquetes(c1, 4);
     mostrarContenedor(otro);
 
     cout << "\n ******** Prueba analisisDestinos ******** \n";
