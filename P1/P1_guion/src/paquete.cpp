@@ -6,7 +6,18 @@
 
 #include "../include/paquete.h"
 
-string toString(const Paquete p){}
-Paquete creaPaquete(const int origen, const int destino, const int peso){}
-bool esValido(const Paquete p){}
+//Recibe un paquete y devuelve una cadena con información sobre el mismo
+
+string toString(const Paquete &p){
+    return "O: <" + to_string(p.origen) + "> D: <" + to_string(p.destino) + "> P: <" + to_string(p.peso);
+}
+
+Paquete creaPaquete(const int origen, const int destino, const int peso){
+    Paquete nuevo = {origen, destino, peso};
+    return nuevo;
+}
+
+bool esValido(const Paquete &p){
+    return p.origen > 0 && p.destino > 0 && p.peso > 0;
+}
 
