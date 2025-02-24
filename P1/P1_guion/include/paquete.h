@@ -18,9 +18,9 @@ struct Paquete{
     int peso;
 };
 
-int gTokg(int p);
-string toString(const Paquete p); //Por q da error el string. Mirar formato en pdf
+int gTokg(float p);
+string toString(const Paquete &p); //Por q da error el string. Mirar formato en pdf
 Paquete creaPaquete(const int origen, const int destino, const int peso);
-bool esValido(const Paquete p);
+bool esValido(const Paquete &p);
 
 #endif

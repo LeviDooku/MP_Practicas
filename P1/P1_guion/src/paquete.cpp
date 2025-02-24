@@ -6,7 +6,7 @@
 
 #include "../include/paquete.h"
 
-int gTokg(int peso){
+int gTokg(float peso){
     return peso / 1000;
 }
 

@@ -25,7 +25,7 @@ void mostrarContenedor(const Contenedor &c){
 //Calcular el peso total de un contenedor en kg
 
 int calcularPeso(const Contenedor &c){
-        int peso_total = 0;
+        float peso_total = 0;
         for(int i = 0; i < c.utiles; ++i)
                 peso_total += c.lista[i].peso;
         return gTokg(peso_total);
@@ -33,7 +33,7 @@ int calcularPeso(const Contenedor &c){
 
 //Crear un objeto contenedor nuevo a partir de otro contenedor. El nuevo contendrá solo los paquetes con el origen indicado por parámetro
 
-Contenedor obtenienePaquetes(const Contenedor &c, const int origen){
+Contenedor obtienePaquetes(const Contenedor &c, const int origen){
         Contenedor nuevo;
         for(int i = 0; i < c.utiles; ++i){
                 if(c.lista[i].origen == origen)
@@ -42,12 +42,44 @@ Contenedor obtenienePaquetes(const Contenedor &c, const int origen){
         return nuevo;
 }
 
-void bubbleSort(){}
+//Función auxiliar de intercambio de paquetes
 
-void ordear(Contenedor &c){
-
+void intercambiaPaquetes(Paquete &a, Paquete &b){
+        Paquete aux = a;
+        a = b;
+        b = aux;
 }
 
-//? enviosDestino(const Contenedor c, const int destino){}
+//Ordenar un contenedor con el criterio indicado en el guion. Es una modificación del bubble sort
 
-void analisisDestinos(const Contenedor c){}
+void bubbleSort_pers(Contenedor &c){
+        for(int i = 0; i < c.utiles - 1; ++i){
+                for(int j = 0; j < c.utiles - i - 1; ++j){
+                        if(c.lista[j].origen > c.lista[j + 1].origen || 
+                        c.lista[j].origen == c.lista[j + 1].origen &&
+                        c.lista[j].destino > c.lista[j + 1].destino)
+                                intercambiaPaquetes(c.lista[j], c.lista[j + 1]);
+                }
+        }
+}
+
+//Llama a bubbleSort_pers (se hace así para hacer el código más modular)
+
+void ordear(Contenedor &c){
+        bubbleSort_pers(c);
+}
+
+void enviosDestino(const Contenedor &c, const int destino, int &nro, float &peso){
+        nro = 0; 
+        peso = 0.0;
+        for(int i = 0; i < c.utiles; ++i){
+                if(c.lista[i].destino == destino){
+                        peso += gTokg(c.lista[i].peso);
+                        nro++;
+                }
+        }
+}
+
+void analisisDestinos(const Contenedor &c){
+
+}
