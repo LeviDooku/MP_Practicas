@@ -6,19 +6,19 @@
 
 #include "../include/paquete.h"
 
-int gTokg(float peso){
-    return peso / 1000;
+float gTokg(float peso){
+    return peso / 1000.0f;
 }
 
 //Recibe un paquete y devuelve una cadena con información sobre el mismo
 
 string toString(const Paquete &p){
-    return "O: <" + to_string(p.origen) + "> D: <" + to_string(p.destino) + "> P: <" + to_string(gTokg(p.peso));
+    return "Origen: " + to_string(p.origen) + " | Destino: " + to_string(p.destino) + " | Peso: " + to_string(gTokg(p.peso));
 }
 
 //Crear paquete a partir de unos parámetros
 
-Paquete creaPaquete(const int origen, const int destino, const int peso){
+Paquete creaPaquete(const int origen, const int destino, const float peso){
     Paquete nuevo = {origen, destino, peso};
     return nuevo;
 }

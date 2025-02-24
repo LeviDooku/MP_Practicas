@@ -15,12 +15,12 @@ using namespace std;
 struct Paquete{
     int origen;
     int destino;
-    int peso;
+    float peso;
 };
 
-int gTokg(float p);
+float gTokg(float p);
 string toString(const Paquete &p); //Por q da error el string. Mirar formato en pdf
-Paquete creaPaquete(const int origen, const int destino, const int peso);
+Paquete creaPaquete(const int origen, const int destino, const float peso);
 bool esValido(const Paquete &p);
 
 #endif

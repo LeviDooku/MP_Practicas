@@ -10,7 +10,7 @@
 
 //Agregar un paquete al contenedor, si este es válido
 
-void agregarPaquete(Contenedor &c, Paquete &p){
+void agregaPaquete(Contenedor &c, Paquete &p){
         if(c.utiles < Contenedor::MAX && esValido(p))
                 c.lista[c.utiles++] = p;
 }
@@ -24,7 +24,7 @@ void mostrarContenedor(const Contenedor &c){
 
 //Calcular el peso total de un contenedor en kg
 
-int calcularPeso(const Contenedor &c){
+float calcularPeso(const Contenedor &c){
         float peso_total = 0;
         for(int i = 0; i < c.utiles; ++i)
                 peso_total += c.lista[i].peso;
@@ -65,7 +65,7 @@ void bubbleSort_pers(Contenedor &c){
 
 //Llama a bubbleSort_pers (se hace así para hacer el código más modular)
 
-void ordear(Contenedor &c){
+void ordenar(Contenedor &c){
         bubbleSort_pers(c);
 }
 
@@ -81,5 +81,5 @@ void enviosDestino(const Contenedor &c, const int destino, int &nro, float &peso
 }
 
 void analisisDestinos(const Contenedor &c){
-
+        cout << "NADA";
 }
