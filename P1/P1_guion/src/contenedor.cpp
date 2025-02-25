@@ -35,6 +35,7 @@ float calcularPeso(const Contenedor &c){
 
 Contenedor obtienePaquetes(const Contenedor &c, const int origen){
         Contenedor nuevo;
+        
         for(int i = 0; i < c.utiles; ++i){
                 if(c.lista[i].origen == origen)
                         nuevo.lista[nuevo.utiles++] = c.lista[i];

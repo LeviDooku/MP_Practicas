@@ -19,7 +19,7 @@ struct Paquete{
 };
 
 float gTokg(float p);
-string toString(const Paquete &p); //Por q da error el string. Mirar formato en pdf
+string toString(const Paquete &p);
 Paquete creaPaquete(const int origen, const int destino, const float peso);
 bool esValido(const Paquete &p);
 
