@@ -44,7 +44,6 @@ int main() {
     cout << "\n ******** Prueba analisisDestinos ******** \n";
     analisisDestinos(c1);
     
-
     return (0);
 }
 

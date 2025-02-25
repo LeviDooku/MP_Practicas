@@ -4,8 +4,6 @@
 // Pedro Velasco Santana      //
 ////////////////////////////////
 
-// TO DO: mirar parámetros: valor, referencia, referencia constante?
-
 #ifndef CONTENEDOR_H
 #define CONTENEDOR_H
 

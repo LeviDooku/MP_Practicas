@@ -70,6 +70,8 @@ void ordenar(Contenedor &c){
         bubbleSort_pers(c);
 }
 
+//Recibe un contenedor y muestra el número de paquetes y el peso total enviado a cada destino
+
 void enviosDestino(const Contenedor &c, const int destino, int &nro, float &peso){
         nro = 0; 
         peso = 0.0;
@@ -82,5 +84,30 @@ void enviosDestino(const Contenedor &c, const int destino, int &nro, float &peso
 }
 
 void analisisDestinos(const Contenedor &c){
-        cout << "NADA";
+        int destinosEncontrados[15] = {0};
+        int totalDestinos = 0;
+
+        for(int i = 0; i < c.utiles; ++i){
+                int destinoActual = c.lista[i].destino;
+                bool encontrado = false;
+
+                for(int j = 0; j < totalDestinos; ++j)
+                        encontrado = encontrado || (destinosEncontrados[j] == destinoActual);
+                
+                if (!encontrado){
+                        destinosEncontrados[totalDestinos] = destinoActual;
+                        totalDestinos++;
+                }
+        }
+
+        for(int i = 0; i < totalDestinos; ++i){
+                int nro;
+                float peso;
+                enviosDestino(c, destinosEncontrados[i], nro, peso);
+                if(nro > 0){
+                        std::cout << "Destino: " << destinosEncontrados[i] 
+                                << " | Paquetes: " << nro
+                                << " | Peso total: " << peso << std::endl;
+                }
+        }
 }
