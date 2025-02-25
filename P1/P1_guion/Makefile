@@ -12,15 +12,16 @@ INCLUDE = $(HOME)/include
 OBJ = $(HOME)/obj
 LIB = $(HOME)/lib
 SRC = $(HOME)/src
+DOC = $(HOME)/doc
 
 CXX = g++
 CXXFLAGS = -c -I$(INCLUDE)
 AR = ar rvs
 LDFLAGS = -L$(LIB) -lpaquete -lcontenedor
 
-.PHONY: all clean mrproper genera_dir
+.PHONY: all clean mrproper genera_dir doc clean-doc
 
-#Directivas de compilación #TO DO
+#Directivas de compilación
 
 all : genera_dir $(BIN)/prueba
 	@echo [+] FINALIZADO CON ÉXITO
@@ -67,6 +68,15 @@ clean:
 	@echo [+] Eliminando ficheros objeto, ejecutable y librería
 	@rm $(OBJ)/*.o 
 
-mrproper: 
-	@echo [+] Eliminando directorios $(BIN)/, $(OBJ)/ y $(LIB)/
-	@rm -rf $(BIN) $(OBJ) $(LIB)
+mrproper: clean-doc
+	@echo [+] Eliminando directorios $(BIN), $(OBJ) y $(LIB)
+	@rm -rf $(BIN) $(OBJ) $(LIB) $(DOC)
+
+doc:
+	@echo [+] Generando documentación con Doxygen
+	@doxygen $(DOC)/Doxyfile
+	@echo [+] Documentación generada en ./doc/html/index.html
+
+clean-doc:
+	@rm -rf $(DOC)/html $(DOC)/latex
+	@echo [+] Documentación eliminada.
