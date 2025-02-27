@@ -17,13 +17,29 @@ DOC = $(HOME)/doc
 CXX = g++
 CXXFLAGS = -c -I$(INCLUDE)
 AR = ar rvs
-LDFLAGS = -L$(LIB) -lpaquete -lcontenedor
+LDFLAGS = -L$(LIB) -lproceso
 
 .PHONY: all clean mrproper genera_dir doc clean-doc
 
 #Directivas de compilación
 
-all : genera_dir 
+all : genera_dir $(BIN)/main 
+
+$(BIN)/main : $(OBJ)/main.o $(LIB)/libproceso.a
+	@echo [+] Generando ejecutable $(BIN)/main
+	@$(CXX) -o $(BIN)/main $(OBJ)/main.o $(LDFLAGS)
+
+$(OBJ)/main.o : $(SRC)/main.cpp $(INCLUDE)/proceso.h 
+	@echo [+] Generando objeto $(OBJ)/main.o
+	@$(CXX) $(CXXFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
+
+$(OBJ)/proceso.o : $(SRC)/proceso.cpp $(INCLUDE)/proceso.h
+	@echo [+] Generando objeto $(OBJ)/proceso.o
+	@$(CXX) $(CXXFLAGS) -o $(OBJ)/proceso.o $(SRC)/proceso.cpp
+
+$(LIB)/libproceso.a: $(OBJ)/proceso.o
+	@echo [+] Generando librería $(LIB)/libproceso.a
+	@$(AR) $(LIB)/libproceso.a $(OBJ)/proceso.o
 
 #Directivas para la generacion de directorios, clean  y mrproper
 

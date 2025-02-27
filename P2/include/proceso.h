@@ -27,15 +27,12 @@ bool sonIguales(const char cad1[],const char cad2[]);
  */
 int longitud(const char cad[]);
 
-
-
 /**
  * @brief Calcula el número de caracteres que aparecen una sola vez en la cadena
  * @param cad1 cadena tipo C
  * @return un valor entero
  */
 int carsUnicos(const char cad1[]);
-
 
 /**
  * @brief Comprueba si dos cadenas son anagramas. Es decir, tienen exactamente los mismos caracteres pero en cualquier posición.
@@ -45,7 +42,6 @@ int carsUnicos(const char cad1[]);
  * @return Verdadero (si son anagramas) o Falso (en caso contrario) 
  */
 bool anagrama(const char cad1[],const char cad2[]);
-
 
 /**
  * @brief Recibe una cadena y devuelve otra “comprimida”
