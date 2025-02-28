@@ -19,8 +19,6 @@ int main() {
     char cad2[MAX_SIZE];
     char cad3[MAX_SIZE];
     
-
-   
     strcpy(cad1, "123456789");
     strcpy(cad2, "123456789");
     cout << "La longitud de la cadena " << cad1 << " es: " << longitud(cad1) << endl;
