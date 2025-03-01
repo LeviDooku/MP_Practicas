@@ -43,7 +43,6 @@ int main() {
     cad1[0] = 'a';
     cout << "Las cadenas\n" << cad1 << endl << cad2 << endl << " son anagramas? " << (anagrama(cad1, cad2)?"SI":"NO") << endl;
     
-    
     //cout << "Son Iguales : " << sonIguales(frase, salida) << endl;
     cout << "----------------------------------------------------" << endl;
     strcpy(cad1, "aaaabbbccd");
