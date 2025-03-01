@@ -14,7 +14,7 @@ using namespace std;
 
 
 int main() {
-
+    
     char cad1[MAX_SIZE];
     char cad2[MAX_SIZE];
     char cad3[MAX_SIZE];
