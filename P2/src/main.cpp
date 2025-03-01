@@ -59,8 +59,6 @@ int main() {
     
     cout << "Las cadenas\n" << cad1 << endl << cad3 << endl << "son iguales? " << (sonIguales(cad1, cad3)?"SI":"NO") << endl;
     
-    
-   
     return (0);
 }
 
