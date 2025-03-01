@@ -20,8 +20,10 @@ bool sonIguales(const char cad1[],const char cad2[]){
 
 int longitud(const char cad[]){
     int longitud = 0;
+
     while(cad[longitud] != TERMINADOR)
         longitud++;
+
     return longitud;
 }
 
@@ -30,20 +32,30 @@ int carsUnicos(const char cad1[]){
     int i = 0;
     int contador = 0;
 
-    while(cad1[i != '\0']){
+    while (cad1[i] != TERMINADOR){
         char actual = cad1[i];
-        for(int j = 0; j < longitud(cad1); ++j){
-            if(aux[j] != actual){
-                aux[j] = actual;
-                contador++;
-            }
+        bool encontrado = false;
+        int j = 0;
+
+        while (aux[j] != TERMINADOR && !encontrado){
+            encontrado = (aux[j] == actual);
+            j++;
         }
+
+        if (!encontrado){
+            aux[j] = actual;
+            aux[j + 1] = TERMINADOR;
+            contador++;
+        }
+        i++;
     }
+
     return contador;
 }
 
 bool anagrama(const char cad1[],const char cad2[]){
-    return false;
+    bool resultado = false;
+    
 }
 
 void compress(const char frase[], char salida []){}
