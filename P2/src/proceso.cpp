@@ -53,9 +53,9 @@ int carsUnicos(const char cad1[]){
     return contador;
 }
 
-
 bool anagrama(const char cad1[],const char cad2[]){
     bool resultado = false;
+    return resultado;
     
 }
 
