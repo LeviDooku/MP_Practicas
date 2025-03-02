@@ -6,8 +6,8 @@
  */
 
 #include <iostream>
-#include "proceso.h"
 #include <cstring>
+#include "../include/proceso.h"
 
 using namespace std;
 
