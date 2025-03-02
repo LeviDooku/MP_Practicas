@@ -61,4 +61,3 @@ bool anagrama(const char cad1[],const char cad2[]){
 void compress(const char frase[], char salida []){}
 
 void decompress(const char frase[], char salida[]){}
-
