@@ -55,8 +55,7 @@ int carsUnicos(const char cad1[]){
 
 bool anagrama(const char cad1[],const char cad2[]){
     bool resultado = false;
-    return resultado;
-    
+    return resultado;   
 }
 
 void compress(const char frase[], char salida []){}
