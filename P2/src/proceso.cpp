@@ -54,8 +54,22 @@ int carsUnicos(const char cad1[]){
 }
 
 bool anagrama(const char cad1[],const char cad2[]){
-    bool resultado = false;
-    return resultado;   
+    int i = 0;
+    int contador = 0;
+
+    while(cad1[i] != TERMINADOR){
+        char actual = cad1[i];
+        int j = 0;
+
+        while (cad2[j] != TERMINADOR){
+            if(actual == cad2[j])
+                contador++;
+            j++;
+        }
+        i++;
+    }
+
+    return (contador == longitud(cad1)) ? true : false;
 }
 
 void compress(const char frase[], char salida []){}

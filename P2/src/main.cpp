@@ -35,7 +35,7 @@ int main() {
     cout << "----------------------------------------------------" << endl;
     
     strcpy(cad1, "123456789");
-    strcpy(cad2, "432198765");
+    strcpy(cad2, "987654321");
     cout << "Las cadenas\n" << cad1 << endl << cad2 << endl << " son anagramas? " << (anagrama(cad1, cad2)?"SI":"NO") << endl;
     
     cad1[0] = 'a';
