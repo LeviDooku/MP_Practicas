@@ -1,6 +1,6 @@
 ////////////////////////////////
 // Práctica 2                 //
-// file: src/contenedor.cpp   //
+// file: src/proceso.cpp      //
 // Pedro Velasco Santana      //
 ////////////////////////////////
 
