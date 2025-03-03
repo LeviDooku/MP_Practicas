@@ -1,5 +1,5 @@
 ////////////////////////////////
-// Práctica 1                 //
+// Práctica 2                 //
 // file: src/contenedor.cpp   //
 // Pedro Velasco Santana      //
 ////////////////////////////////
