@@ -72,7 +72,7 @@ bool anagrama(const char cad1[],const char cad2[]){
 }
 
 //Se presupone que frase ya está ordenada
-// TODO Corregirr, no va
+// ! Corregirr, no va
 void compress(const char frase[], char salida []){
     int i = 0;
     int contador = 0;
