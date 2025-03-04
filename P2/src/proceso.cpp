@@ -72,6 +72,29 @@ bool anagrama(const char cad1[],const char cad2[]){
     return (contador == longitud(cad1)) ? true : false;
 }
 
-void compress(const char frase[], char salida []){}
+//Se presupone que frase ya está ordenada
+//TODO Está mal
+void compress(const char frase[], char salida []){
+    int i = 0;
+    int contador = 0;
+    int j = 0;
+
+    while(frase[i] != TERMINADOR){
+        char actual = frase[i];
+
+        while(frase[i] == actual){
+            contador++;
+            i++;
+        }
+            
+        salida[j] = actual;
+        salida[j + 1] = contador;
+        salida[j + 2] = TERMINADOR;
+
+        contador = 0;
+        j = i;
+        i++;
+    }
+}
 
 void decompress(const char frase[], char salida[]){}
