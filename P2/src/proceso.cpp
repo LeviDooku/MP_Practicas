@@ -68,12 +68,11 @@ bool anagrama(const char cad1[],const char cad2[]){
         }
         i++;
     }
-
     return (contador == longitud(cad1)) ? true : false;
 }
 
 //Se presupone que frase ya está ordenada
-// ! Está muy mal
+// TODO Corregirr, no va
 void compress(const char frase[], char salida []){
     int i = 0;
     int contador = 0;
