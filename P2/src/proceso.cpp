@@ -72,6 +72,7 @@ bool anagrama(const char cad1[],const char cad2[]){
     return (contador == longitud(cad1)) ? true : false;
 }
 
+//Función auxiliar para compress y decompress
 void int_to_char(int num, char cadena[], int & indice){
     int temp = num;
     int digitos = 0;
@@ -84,7 +85,7 @@ void int_to_char(int num, char cadena[], int & indice){
 
     //Agregar dígitos a la cadena
     for(int i = digitos - 1; i >= 0; --i){
-        cadena[indice + i] = '0' + (num % 10); //Convertir último dígito y agregarlo
+        cadena[indice + i] = '0' + (num % 10); //Convertir último dígito y agregarlo (en tabla ASCII, los dígitos decimales están ordenados)
         num /= 10; //Eliminar dígito ya agregado
     }
     indice += digitos; //Actualizar el índice después de agregar los dígitos
@@ -102,7 +103,10 @@ void compress(const char frase[], char salida []){
             i++;
         }
         salida[j++] = frase[i];
-        int_to_char(contador, salida, j);
+        if(contador >= 10)
+            int_to_char(contador, salida, j);
+        else
+            salida[j++] = '0' + contador;
         i++;
     }
     salida[j] = TERMINADOR;

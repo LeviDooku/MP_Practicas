@@ -44,7 +44,7 @@ int carsUnicos(const char cad1[]);
 bool anagrama(const char cad1[],const char cad2[]);
 
 /**
- * @brief Convierte un entero a una cadena de caracteres y la agrega a "cadena" a partir de "indice"
+ * @brief Convierte un entero a caracteres y los agrega a "cadena" a partir de "indice"
  * @param num entero a convertir 
  * @param cadena cadena en la que se incluirá
  * @param indice posición a partir de la que se incluirá el entero
