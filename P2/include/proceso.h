@@ -44,6 +44,14 @@ int carsUnicos(const char cad1[]);
 bool anagrama(const char cad1[],const char cad2[]);
 
 /**
+ * @brief Convierte un entero a una cadena de caracteres y la agrega a "cadena" a partir de "indice"
+ * @param num entero a convertir 
+ * @param cadena cadena en la que se incluirá
+ * @param indice posición a partir de la que se incluirá el entero
+ */
+void int_to_char(int num, char cadena[], int & indice);
+
+/**
  * @brief Recibe una cadena y devuelve otra “comprimida”
 de la siguiente forma. Si frase = {aaaBBeeekhh} entonces salida = {a3B2e3k1h2}
  * @param frase cadena tipo C a comprimir

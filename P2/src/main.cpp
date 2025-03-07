@@ -43,7 +43,7 @@ int main() {
     
     //cout << "Son Iguales : " << sonIguales(frase, salida) << endl;
     cout << "----------------------------------------------------" << endl;
-    strcpy(cad1, "aaaabbbccd");
+    strcpy(cad1, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccd");
     compress(cad1, cad2);
     cout << "Cadena original: " << cad1 << " Comprimida: " << cad2 << endl;
     

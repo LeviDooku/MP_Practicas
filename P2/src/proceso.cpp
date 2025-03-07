@@ -5,6 +5,7 @@
 ////////////////////////////////
 
 #include "../include/proceso.h"
+#include <iostream>
 
 bool sonIguales(const char cad1[],const char cad2[]){
     int i = 0;
@@ -71,29 +72,40 @@ bool anagrama(const char cad1[],const char cad2[]){
     return (contador == longitud(cad1)) ? true : false;
 }
 
+void int_to_char(int num, char cadena[], int & indice){
+    int temp = num;
+    int digitos = 0;
+    
+    //Contar los dígitos de num
+    do{
+       digitos++;
+       temp /= 10; 
+    }while(temp > 0);
+
+    //Agregar dígitos a la cadena
+    for(int i = digitos - 1; i >= 0; --i){
+        cadena[indice + i] = '0' + (num % 10); //Convertir último dígito y agregarlo
+        num /= 10; //Eliminar dígito ya agregado
+    }
+    indice += digitos; //Actualizar el índice después de agregar los dígitos
+}
+
 //Se presupone que frase ya está ordenada
-// ! Corregirr, no va
 void compress(const char frase[], char salida []){
     int i = 0;
-    int contador = 0;
     int j = 0;
 
     while(frase[i] != TERMINADOR){
-        char actual = frase[i];
-
-        while(frase[i] == actual){
+        int contador = 1;
+        while(frase[i] == frase[i + 1] && frase[i + 1] != TERMINADOR){
             contador++;
             i++;
         }
-            
-        salida[j] = actual;
-        salida[j + 1] = contador;
-        salida[j + 2] = TERMINADOR;
-
-        contador = 0;
-        j = i;
+        salida[j++] = frase[i];
+        int_to_char(contador, salida, j);
         i++;
     }
+    salida[j] = TERMINADOR;
 }
 
 void decompress(const char frase[], char salida[]){}
