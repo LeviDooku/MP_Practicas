@@ -52,8 +52,8 @@ $(LIB)/libcontenedor.a: $(OBJ)/contenedor.o
 
 #Directivas para la generacion de directorios, clean  y mrproper
 
-genera_dir: $(BIN)/ $(OBJ)/ $(LIB)/
-	@echo [+] Directorios $(BIN)/, $(OBJ)/ y $(LIB)/ generados
+genera_dir: $(BIN)/ $(OBJ)/ $(LIB)/ $(DOC)/
+	@echo [+] Directorios $(BIN)/, $(OBJ)/, $(LIB)/ y $(DOC) generados
 
 $(BIN)/:
 	@mkdir -p $(BIN)
@@ -63,6 +63,9 @@ $(OBJ)/:
 
 $(LIB)/:
 	@mkdir -p $(LIB)
+
+$(DOC)/:
+	@mkdir -p $()
 
 clean:
 	@echo [+] Eliminando ficheros objeto, ejecutable y librería

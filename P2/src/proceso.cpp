@@ -5,14 +5,15 @@
 ////////////////////////////////
 
 #include "../include/proceso.h"
-#include <iostream>
+#include <iostream> //Para atoi()
+#include <cstring> //Para strcpy()
 
 bool sonIguales(const char cad1[],const char cad2[]){
     int i = 0;
-    bool resultado = (longitud(cad1) == longitud(cad2)) ? true : false;
+    bool resultado = (longitud(cad1) == longitud(cad2));
 
     do{
-        resultado = (cad1[i] == cad2[i]) ? true : false;
+        resultado = (cad1[i] == cad2[i]);
         i++;
     }while(cad1[i] != TERMINADOR && resultado);
 
@@ -50,26 +51,54 @@ int carsUnicos(const char cad1[]){
         }
         i++;
     }
-
     return contador;
 }
 
-bool anagrama(const char cad1[],const char cad2[]){
-    int i = 0;
-    int contador = 0;
+//Función auxiliar para intercambiar dos caracteres
+void intercambiaChar(char &a, char &b){
+    char temp = a;
+    a = b;
+    b = temp;
+}
 
-    while(cad1[i] != TERMINADOR){
-        char actual = cad1[i];
-        int j = 0;
+//Función auxiliar para ordenar una cadena de caracteres usando Bubble Sort
+void ordenarCadena(char cadena[]) {
+    int n = longitud(cadena);
 
-        while (cad2[j] != TERMINADOR){
-            if(actual == cad2[j])
-                contador++;
-            j++;
+    bool intercambio = true;
+    while(intercambio){
+        intercambio = false;
+        int i = 0;
+        while(i < n - 1){
+            if(cadena[i] > cadena[i + 1]){  
+                intercambiaChar(cadena[i], cadena[i + 1]);
+                intercambio = true;
+            }
+            i++;
         }
+    }
+}
+
+bool anagrama(const char cad1[],const char cad2[]){
+    char cad_aux[longitud(cad1) + 1]; //Copias de las cadenas
+    char cad_aux1[longitud(cad2) + 1];
+
+    strcpy(cad_aux, cad1);
+    strcpy(cad_aux1, cad2);
+
+    ordenarCadena(cad_aux); //Se ordenan
+    ordenarCadena(cad_aux1);
+    
+    //Comparación caracter a caracter
+    int i = 0;
+    bool resultado = true; 
+
+    while (cad_aux[i] != TERMINADOR && resultado){
+        resultado = (cad_aux[i] == cad_aux1[i]);
         i++;
     }
-    return (contador == longitud(cad1)) ? true : false;
+
+    return resultado;
 }
 
 //Función auxiliar para compress y decompress
@@ -112,4 +141,27 @@ void compress(const char frase[], char salida []){
     salida[j] = TERMINADOR;
 }
 
-void decompress(const char frase[], char salida[]){}
+void decompress(const char frase[], char salida[]){
+    int i = 0;
+    int j = 0;
+
+    while(frase[i] != TERMINADOR){
+        if(frase[i] < '0' || frase[i] > '9'){ //Estamos ante un caracter no numérico
+            salida[j] = frase[i];
+        }
+        else{
+            char temp[10] = {0}; //10 posiciones que suponen los dígitos que se necesitan para almacenar el valor max de un signed int
+            int k = 0;
+            while(frase[i] >= '0' && frase[i] <= '9' && frase[i] != TERMINADOR){ //Almecenar en un array auxiliar los dígitos
+                temp[k++] = frase[i];
+                i++;
+            }
+            int repeticiones = atoi(temp); //Convertir a entero
+            for(int r = 0; r < repeticiones; ++r){ //Agregarlo a la salida
+                salida[j++] = frase[i - k - 1];  
+            }
+        }
+        i++;
+    }
+    salida[j] = TERMINADOR;
+}

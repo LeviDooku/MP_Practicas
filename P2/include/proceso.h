@@ -35,6 +35,19 @@ int longitud(const char cad[]);
 int carsUnicos(const char cad1[]);
 
 /**
+ * @brief Intercambia dos caracteres
+ * @param a caracter a intercambiar con b
+ * @param b caracter a intercambiar con a
+ */
+void intercambiaCadena(char &a, char &b);
+
+/**
+ * @brief Ordena una cadena de caracteres 
+ * @param cadena cadena tipo C a ordenar
+ */
+void ordenarCadena(char cadena[]);
+
+/**
  * @brief Comprueba si dos cadenas son anagramas. Es decir, tienen exactamente los mismos caracteres pero en cualquier posición.
  * Por ejemplo abcabc y aaccbb son anagramas. En cambio abcd y abde, no lo son.
  * @param cad1 primera cadena tipo C
