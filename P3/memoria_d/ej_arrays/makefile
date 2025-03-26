@@ -61,7 +61,7 @@ $(LIB)/:
 
 clean:
 	@echo [+] Eliminando ficheros objeto, ejecutable y librería
-	@rm $(OBJ)/*.o 
+	@rm $(OBJ)/*.o
 
 mrproper: clean-doc
 	@echo [+] Eliminando directorios $(BIN), $(OBJ) y $(LIB)
