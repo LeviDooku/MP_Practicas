@@ -57,3 +57,80 @@ void Redimensiona(int * &p, int util, int tipo, int &cap){
 
     cap = new_size;
 }
+
+int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res_cap, int &res_util){
+    int *v;
+    int cap = TAM_BLOQUE;
+    v = new int [cap];
+    int util = 0;
+
+    for(int i = 0; i < n1; ++i){
+        if(util == cap) Redimensiona(v, util, 1, cap);
+        bool repe = false;
+        for(int j = 0; j < util && !repe; ++j){
+            repe = (v1[i] == v[j]) ? true : false;
+        }
+        
+        if(!repe){
+            v[util] = v1[i];
+            util++;
+        }
+    }
+
+    for(int i = 0; i < n2; ++i){
+        if(util == cap) Redimensiona(v, util, 1, cap);
+        bool repe = false;
+        for(int j = 0; j < util && !repe; ++j){
+            repe = (v2[i] == v[j]) ? true : false;
+        }
+        
+        if(!repe){
+            v[util] = v2[i];
+            util++;
+        }
+    }
+
+    res_cap = util;
+    res_util = util;
+    return v;
+}
+
+bool en_ambos(const int *v1, const int *v2, const int util1, const int util2, const int buscar){
+    bool en_ambos = false;
+
+    for(int i = 0; i < util1; ++i){
+        if(v1[i] == buscar){
+            for(int j = 0; j < util2; ++j)
+                if(v2[j] == buscar) en_ambos = true;
+        } 
+    }
+
+    return en_ambos;
+}
+
+int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap, int &res_util){
+    int *v;
+    int cap = TAM_BLOQUE;
+    v = new int [cap];
+    int util = 0;
+
+    for(int i = 0; i < n1; ++i){
+        if(en_ambos(v1, v2, n1, n2, v1[i])){
+            if(util == cap) Redimensiona(v, util, 1, cap);
+            
+            bool repe = false;
+            for(int j = 0; j < util && !repe; ++j){
+                repe = (v1[i] == v[j]) ? true : false;
+            }
+            
+            if(!repe && en_ambos){
+                v[util] = v1[i];
+                util++;
+            }
+        }
+    }
+
+    res_cap = util;
+    res_util = util;
+    return v;
+}
