@@ -133,7 +133,7 @@ int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, i
     return v;
 }
 
-void multiplos(const int * v, int cap, int nro, int * &mult, int &m_cap){
+void multiplos(const int * v, const int cap, const int nro, int * &mult, int &m_cap){
     m_cap = TAM_BLOQUE;
     mult = new int [TAM_BLOQUE];
     int util = 0;

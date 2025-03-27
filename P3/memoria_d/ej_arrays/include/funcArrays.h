@@ -67,6 +67,14 @@ bool en_ambos(const int *v1, const int *v2, const int util1, const int util2, co
  */
 int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap);
 
-void multiplos(const int * v, int cap, int nro, int * &mult, int &m_cap);
+/**
+ * @brief Modifica un array para que incluya solo los múltiplos de un número presentes en otro array
+ * @param v Puntero entero, array donde se extraen múltiplos
+ * @param cap Capacidad de v
+ * @param nro Número a comprobar
+ * @param mult Array dinámico a rellenar con múltiplos de nro
+ * @param m_cap Capacidad del array mult
+ */
+void multiplos(const int * v, const int cap, const int nro, int * &mult, int &m_cap);
 
 #endif
