@@ -46,17 +46,17 @@ int main(){
     cout << "El array 2 es: " << "(capacidad: " << capacidad1 << ") ; (utilizados: " << util1 << ")" << endl;
     mostrar(v1, util1);
 
-    int u_cap = 0, u_util = 0; 
-    int *resultado_u = Union(v, v1, util, util1, u_cap, u_util);
+    int u_cap = 0; 
+    int *resultado_u = Union(v, v1, util, util1, u_cap);
 
-    cout << "El array union es: " << "(capacidad: " << u_cap << ") ; (utilizados: " << u_util << ")" << endl;
-    mostrar(resultado_u, u_util);
+    cout << "El array union es: " << "(capacidad: " << u_cap << ")" << endl;
+    mostrar(resultado_u, u_cap);
 
-    int i_cap = 0, i_util = 0; 
-    int *resultado_i = Interseccion(v, v1, util, util1, i_cap, i_util);
+    int i_cap = 0;
+    int *resultado_i = Interseccion(v, v1, util, util1, i_cap);
 
-    cout << "El array intersección es: " << "(capacidad: " << i_cap << ") ; (utilizados: " << i_util << ")" << endl;
-    mostrar(resultado_i, i_util);
+    cout << "El array intersección es: " << "(capacidad: " << i_cap << ")" << endl;
+    mostrar(resultado_i, i_cap);
 
     delete [] v;
     delete [] v1;

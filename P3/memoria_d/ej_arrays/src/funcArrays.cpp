@@ -58,7 +58,7 @@ void Redimensiona(int * &p, int util, int tipo, int &cap){
     cap = new_size;
 }
 
-int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res_cap, int &res_util){
+int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res_cap){
     int *v;
     int cap = TAM_BLOQUE;
     v = new int [cap];
@@ -91,7 +91,6 @@ int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res
     }
 
     res_cap = util;
-    res_util = util;
     return v;
 }
 
@@ -108,7 +107,7 @@ bool en_ambos(const int *v1, const int *v2, const int util1, const int util2, co
     return en_ambos;
 }
 
-int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap, int &res_util){
+int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap){
     int *v;
     int cap = TAM_BLOQUE;
     v = new int [cap];
@@ -131,6 +130,25 @@ int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, i
     }
 
     res_cap = util;
-    res_util = util;
     return v;
+}
+
+void multiplos(const int * v, int cap, int nro, int * &mult, int &m_cap){
+    m_cap = TAM_BLOQUE;
+    mult = new int [TAM_BLOQUE];
+    int util = 0;
+
+    for(int i = 0; i < cap; ++i){
+        bool repe = false;
+        for(int j = 0; j < util; ++j)
+            if(mult[j] == v[i]) repe = true;
+
+        if(v[i] % nro == 0 && !repe){
+            if(util == m_cap) Redimensiona(mult, util, 1, m_cap);
+            mult[util] = v[i];
+            util++;
+        }
+    }
+
+    m_cap = util;
 }

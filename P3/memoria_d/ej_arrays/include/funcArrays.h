@@ -42,7 +42,7 @@ void Redimensiona(int * &p, int util, int tipo, int &cap);
  * @param n2 Tamaño de v2
  * @return Array dinámico resultante de la unión de v1 y v2
  */
-int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res_cap, int &res_util);
+int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res_cap);
 
 /**
  * @brief Función auxliar para determinar si un elemento está presente en dos arrays
@@ -51,6 +51,7 @@ int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res
  * @param n1 Tamaño de v1
  * @param n2 Tamaño de v2
  * @param buscar Elemento a comprobar
+ * @param res_cap Capacidad del array resultado
  * @return True si está en ambos, false en caso contrario
  */
 bool en_ambos(const int *v1, const int *v2, const int util1, const int util2, const int buscar);
@@ -61,8 +62,11 @@ bool en_ambos(const int *v1, const int *v2, const int util1, const int util2, co
  * @param v2 Puntero a entero, posición inicial del segundo array
  * @param n1 Tamaño de v1
  * @param n2 Tamaño de v2
+ * @param res_cap Capacidad del array resultado
  * @return Array dinámico resultante de la intersección de v1 y v2
  */
-int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap, int &res_util);
+int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap);
+
+void multiplos(const int * v, int cap, int nro, int * &mult, int &m_cap);
 
 #endif
