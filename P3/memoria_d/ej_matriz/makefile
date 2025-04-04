@@ -17,29 +17,45 @@ DOC = $(HOME)/doc
 CXX = g++
 CXXFLAGS = -c -I$(INCLUDE)
 AR = ar rvs
-LDFLAGS = -L$(LIB) -lfunc
+LDFLAGS = -L$(LIB) -lpruebas -limagen -lpgm
 
 #Detectar Binarios
 
-CPP_SOURCE      = $(wildcard $(SRC)/ej*.cpp)
+CPP_SOURCE      = $(filter-out $(SRC)/Imagen.cpp $(SRC)/pruebasValgrind.cpp $(SRC)/pgm.cpp $(SRC)/pruebas.cpp, $(wildcard $(SRC)/*.cpp))
 BINARIES        = $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(CPP_SOURCE))
 
 .PHONY: all clean mrproper genera_dir doc clean-doc
 
 #Directivas de compilación
 
-all: genera_dir $(LIB)/libfunc.a $(BINARIES)
+all: genera_dir $(LIB)/libpgm.a $(LIB)/libimagen.a $(LIB)/libpruebas.a $(BINARIES)
 	@echo "[+] Todo está compilado correctamente"
 
-$(OBJ)/funcArrays.o: $(SRC)/funcArrays.cpp $(INCLUDE)/funcArrays.h
-	@echo "[+] Generando objeto funcArrays.o"
+$(OBJ)/Imagen.o: $(SRC)/Imagen.cpp $(INCLUDE)/Imagen.h
+	@echo "[+] Generando objeto Imagen.o"
 	@$(CXX) $(CXXFLAGS) -o $@ $<
 
-$(LIB)/libfunc.a: $(OBJ)/funcArrays.o
-	@echo "[+] Generando librería libfunc.a"
+$(LIB)/libimagen.a: $(OBJ)/Imagen.o
+	@echo "[+] Generando librería libimagen.a"
 	@$(AR) $@ $<
 
-$(BIN)/%: $(SRC)/%.cpp $(LIB)/libfunc.a
+$(OBJ)/pgm.o: $(SRC)/pgm.cpp $(INCLUDE)/pgm.h $(INCLUDE)/Imagen.h
+	@echo "[+] Generando objeto pgm.o"
+	@$(CXX) $(CXXFLAGS) -o $@ $<
+
+$(LIB)/libpgm.a: $(OBJ)/pgm.o
+	@echo "[+] Generando librería libpgm.a"
+	@$(AR) $@ $<
+
+$(OBJ)/pruebas.o: $(SRC)/pruebas.cpp $(INCLUDE)/pruebas.h $(INCLUDE)/Imagen.h $(INCLUDE)/pgm.h
+	@echo "[+] Generando objeto pruebas.o"
+	@$(CXX) $(CXXFLAGS) -o $@ $<
+
+$(LIB)/libpruebas.a: $(OBJ)/pruebas.o
+	@echo "[+] Generando librería libpruebas.a"
+	@$(AR) $@ $<
+
+$(BIN)/%: $(SRC)/%.cpp $(LIB)/libimagen.a $(LIB)/libpgm.a $(LIB)/libpruebas.a
 	@echo "[+] Compilando $@..., primer requisito $<"
 	@$(CXX) -o $@ $< $(LDFLAGS)
 

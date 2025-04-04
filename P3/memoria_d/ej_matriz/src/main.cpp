@@ -1,7 +1,6 @@
-
 #include<iostream>
-#include "pgm.h"
-#include "Imagen.h"
+#include "../include/pgm.h" // ! NO ENTREGAR ASÍ
+#include "../include/Imagen.h" // ! NO ENTREGAR ASÍ
 
 using namespace std;
 

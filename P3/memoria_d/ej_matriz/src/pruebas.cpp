@@ -2,13 +2,15 @@
  * File:   pruebas.cpp
  * Author: David A. Pelta
  *
- */
+*/
+
 #include <iostream>
-#include "pruebas.h"
-#include "Imagen.h"
-#include "pgm.h"
+#include "../include/pruebas.h" // ! NO ENTREGAR ASÍ
+#include "../include/Imagen.h" // ! NO ENTREGAR ASÍ
+#include "../include/pgm.h" // ! NO ENTREGAR ASÍ
 
 using namespace std;
+
 void rellena(Imagen & img){
     for(int i = 0; i < img.nf; i++){
         for (int j=0; j< img.nc; j++){

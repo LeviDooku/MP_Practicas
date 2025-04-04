@@ -1,12 +1,9 @@
-
 #include<iostream>
-#include "pgm.h"
-#include "Imagen.h"
-#include "pruebas.h"
+#include "../include/pgm.h" // ! NO ENTREGAR ASÍ
+#include "../include/Imagen.h" // ! NO ENTREGAR ASÍ
+#include "../include/pruebas.h" // ! NO ENTREGAR ASÍ
 
 using namespace std;
-
-
 
 int main(int argc, char*argv[]){
 
@@ -39,12 +36,6 @@ int main(int argc, char*argv[]){
     case 7:{test7(fich); break;}    
     case 8:{test8(fich); break;}    
     }
-    
-/*    
-    for(int i = 1; i <= 4; i++){
-        test2(fich,i);
-    }
-*/
  
 return 0;
 }
