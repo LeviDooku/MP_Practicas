@@ -142,9 +142,29 @@ void rotar(Imagen & img){
     liberaMem(rotada); //Liberar mem de la imagen rotada
 }
 
-void espejoV(const Imagen & origen, Imagen & destino){}
+void espejoV(const Imagen & origen, Imagen & destino){
+    if(destino.M != nullptr) liberaMem(destino); //Liberar mem destino
+    reservaMem(destino, origen.nf * 2, origen.nc);
 
-void espejoH(const Imagen & origen, Imagen & destino){}
+    for(int i = 0; i < origen.nf; ++i){
+        for(int j = 0; j < origen.nc; ++j){
+            destino.M[i][j] = origen.M[i][j];
+            destino.M[destino.nf - 1 - i][j] = origen.M[i][j];
+        }
+    }
+}
+
+void espejoH(const Imagen & origen, Imagen & destino){
+    if(destino.M != nullptr) liberaMem(destino); //Liberar mem destino
+    reservaMem(destino, origen.nf, origen.nc * 2);
+
+    for(int i = 0; i < origen.nf; ++i){
+        for(int j = 0; j < origen.nc; ++j){
+            destino.M[i][j] = origen.M[i][j];
+            destino.M[i][destino.nc - 1 - j] = origen.M[i][j];
+        }
+    }
+}
 
 bool sonIguales(const Imagen & img1, const Imagen & img2){
     bool iguales = (img1.nf == img2.nf && img1.nc == img2.nc);
