@@ -100,11 +100,8 @@ bool leerPGMTexto(Imagen & img, string nombre) {
         f.close();
     }
     }
-
     return exito;
 }
-
-
 
 void getMaxMin(const Imagen & img, int & max, int & min){
 max = min = img.M[0][0];   

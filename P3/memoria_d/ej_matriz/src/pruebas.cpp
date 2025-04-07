@@ -66,7 +66,7 @@ void test4(){
     if (!igual){
         cout << "ERROR" << endl;
     }
-    
+        
     liberaMem(img1);
     liberaMem(img2);   
 }

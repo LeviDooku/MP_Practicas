@@ -9,17 +9,17 @@
 #include "../include/pgm.h" // ! NO ENTREGAR ASÍ
  
 void cargarImagen(Imagen & img, std::string file){
-     int fil, col;
-     TipoImagen tipo = infoPGM(file.c_str(), fil, col);
-     if (tipo == IMG_PGM_TEXTO){
-         liberaMem(img);
-         leerPGMTexto(img, file);
-         }
-     else{
-         std::cerr << "Error en la lectura del fichero " << file << std::endl;
-         exit(-1);
-     }
- }
+    int fil, col;
+    TipoImagen tipo = infoPGM(file.c_str(), fil, col);
+    if (tipo == IMG_PGM_TEXTO){
+        liberaMem(img);
+        leerPGMTexto(img, file);
+        }
+    else{
+        std::cerr << "Error en la lectura del fichero " << file << std::endl;
+        exit(-1);
+    }
+}
  
 void guardarImagen(Imagen & img, std::string file){
      escribirPGMTexto(img, file);
@@ -97,23 +97,50 @@ void reservaMem(Imagen & img, int fil, int col){
     img.M  = new int * [fil];
     for(int i = 0; i < fil; ++i)
         img.M[i] = new int[col];
+
+    img.nf = fil;
+    img.nc = col;
 }
 
 void liberaMem(Imagen & img){
     for(int i = 0; i < img.nf; ++i)
         delete[] img.M[i];
     delete[] img.M;
+
     img.M = nullptr;
+    img.nf = 0;
+    img.nc = 0;
+
 }
 
-// ? COMPLETAR
 void copiar(const Imagen & origen, Imagen & destino){
-    if(destino.M != nullptr) liberaMem(destino);
+    if(destino.M != nullptr) liberaMem(destino); //Liberar mem destino
 
-    reservaMem(destino, origen.nf, origen.nc);
+    reservaMem(destino, origen.nf, origen.nc); //Reservar con tam origen
+
+    //Copia
+    for(int i = 0; i < origen.nf; ++i){
+        for(int j = 0; j < origen.nc; ++j)
+            destino.M[i][j] = origen.M[i][j];
+    }
 }
 
-void rotar(Imagen & img){}
+void rotar(Imagen & img){
+    //Imagen auxiliar rotada
+    Imagen rotada;
+    reservaMem(rotada, img.nc, img.nf); 
+
+    //Rotación
+    for(int i = 0; i < img.nf; ++i){
+        for(int j = 0; j < img.nc; ++j){
+            rotada.M[j][img.nf - 1 - i] = img.M[i][j];
+        }
+    }
+
+    liberaMem(img);
+    copiar(rotada, img); //Copiar imagen rotada a original
+    liberaMem(rotada); //Liberar mem de la imagen rotada
+}
 
 void espejoV(const Imagen & origen, Imagen & destino){}
 
@@ -122,8 +149,8 @@ void espejoH(const Imagen & origen, Imagen & destino){}
 bool sonIguales(const Imagen & img1, const Imagen & img2){
     bool iguales = (img1.nf == img2.nf && img1.nc == img2.nc);
 
-    for(int i = 0; i < img1.nc && iguales; ++i){
-        for(int j = 0; j < img1.nf && iguales; ++j)
+    for(int i = 0; i < img1.nf && iguales; ++i){
+        for(int j = 0; j < img1.nc && iguales; ++j)
             if(img1.M[i][j] != img2.M[i][j]) 
                 iguales = false;
     }
