@@ -45,6 +45,15 @@ void liberaMem(Imagen & img);
 /// @param destino dato de tipo Imagen
 void copiar(const Imagen & origen, Imagen & destino);
 
+/// @brief Función auxiliar que calcula el valor de un pixel de una imagen dado un filtro
+/// Se asume que filtro es una matriz 3x3
+/// @param img dato de tipo imagen a procesar
+/// @param filtro dato de tipo Imagen de 3x3 que representa el filtro a aplicar
+/// @param i Coordenada y del pixel a procesar
+/// @param j Coordenada x del pixel a procesar
+/// @return 
+int valorPixel(const Imagen & img, const Imagen & filtro, int i, int j);
+
 /// @brief aplica el filtro sobre la Imagen img, calculando el nuevo valor para cada pixel. 
 /// Se asume que filtro es una matriz de 3 x 3
 /// @param img dato de tipo Imagen a procesar

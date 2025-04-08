@@ -144,23 +144,23 @@ void rotar(Imagen & img){
 
 void espejoV(const Imagen & origen, Imagen & destino){
     if(destino.M != nullptr) liberaMem(destino); //Liberar mem destino
-    reservaMem(destino, origen.nf * 2, origen.nc);
+    reservaMem(destino, origen.nf * 2, origen.nc); //La imagen tendrá el doble de filas
 
     for(int i = 0; i < origen.nf; ++i){
         for(int j = 0; j < origen.nc; ++j){
-            destino.M[i][j] = origen.M[i][j];
-            destino.M[destino.nf - 1 - i][j] = origen.M[i][j];
+            destino.M[i][j] = origen.M[i][j]; //Se copia la mitad superior
+            destino.M[destino.nf - 1 - i][j] = origen.M[i][j]; //Se copia la mitad inferior al revés
         }
     }
 }
 
 void espejoH(const Imagen & origen, Imagen & destino){
     if(destino.M != nullptr) liberaMem(destino); //Liberar mem destino
-    reservaMem(destino, origen.nf, origen.nc * 2);
+    reservaMem(destino, origen.nf, origen.nc * 2); //La imagen tendrá el doble de columnas
 
     for(int i = 0; i < origen.nf; ++i){
         for(int j = 0; j < origen.nc; ++j){
-            destino.M[i][j] = origen.M[i][j];
+            destino.M[i][j] = origen.M[i][j]; 
             destino.M[i][destino.nc - 1 - j] = origen.M[i][j];
         }
     }
@@ -169,6 +169,7 @@ void espejoH(const Imagen & origen, Imagen & destino){
 bool sonIguales(const Imagen & img1, const Imagen & img2){
     bool iguales = (img1.nf == img2.nf && img1.nc == img2.nc);
 
+    //Se recorre pixel a pixel mientras tengan el mismo valor
     for(int i = 0; i < img1.nf && iguales; ++i){
         for(int j = 0; j < img1.nc && iguales; ++j)
             if(img1.M[i][j] != img2.M[i][j]) 
@@ -177,4 +178,29 @@ bool sonIguales(const Imagen & img1, const Imagen & img2){
     return iguales;
 }
 
-void aplicaFiltro(Imagen & img, const Imagen & filtro){}
+int valorPixel(const Imagen & img, const Imagen & filtro, int i, int j){
+    int valor = 0;
+
+    //Se recorre el filtro
+    for(int k = 0; k < filtro.nf; ++k){
+        for(int l = 0; l < filtro.nc; ++l)
+            valor += img.M[i + k - 1][j + l - 1] * filtro.M[k][l]; //Calcular el valor correctamente
+    }
+
+    return valor;
+}
+
+void aplicaFiltro(Imagen & img, const Imagen & filtro){
+    Imagen aux;
+    copiar(img, aux);
+
+    //Se recorre aux evitando bordes
+    for(int i = 1; i < aux.nf - 1; ++i){
+        for(int j = 1; j < aux.nc - 1; ++j){
+            aux.M[i][j] = valorPixel(img, filtro, i, j); //Modificar valor
+        }
+    }
+
+    copiar(aux, img);
+    liberaMem(aux); //Liberar memoria de aux
+}

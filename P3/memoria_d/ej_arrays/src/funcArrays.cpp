@@ -22,7 +22,7 @@ void mostrar(const int *v, int k){
 //Rellena los primeros k elementos con números aleatorios entre min y max
 void rellenar(int *v, int k, int min, int max){
     for(int i = 0; i < k; i++)
-        v[i] = (random()% (max - min)) + min;
+        v[i] = (random() % (max - min)) + min;
     cout << endl;
 }
 
@@ -49,7 +49,7 @@ void Redimensiona(int * &p, int util, int tipo, int &cap){
     
     if(new_size > cap){
         int *v_ampliado = new int[new_size];
-        for(int i = 0; i < cap; ++i)
+        for(int i = 0; i < util; ++i)
             v_ampliado[i] = p[i];
         delete [] p;
         p = v_ampliado;
@@ -68,7 +68,7 @@ int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res
         if(util == cap) Redimensiona(v, util, 1, cap);
         bool repe = false;
         for(int j = 0; j < util && !repe; ++j){
-            repe = (v1[i] == v[j]) ? true : false;
+            repe = (v1[i] == v[j]);
         }
         
         if(!repe){
@@ -95,16 +95,16 @@ int * Union(const int * v1, const int * v2, const int n1, const int n2, int &res
 }
 
 bool en_ambos(const int *v1, const int *v2, const int util1, const int util2, const int buscar){
-    bool en_ambos = false;
+    bool en_v1 = false;
+    bool en_v2 = en_v1;
 
-    for(int i = 0; i < util1; ++i){
-        if(v1[i] == buscar){
-            for(int j = 0; j < util2; ++j)
-                if(v2[j] == buscar) en_ambos = true;
-        } 
-    }
+    for(int i = 0; i < util1; ++i)
+        if(v1[i] == buscar) en_v1 = true;
 
-    return en_ambos;
+    for(int i = 0; i < util2; ++i)
+        if(v2[i] == buscar) en_v2 = true;
+
+    return en_v1 && en_v2;
 }
 
 int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, int &res_cap){
@@ -122,7 +122,7 @@ int * Interseccion(const int * v1, const int * v2, const int n1, const int n2, i
                 repe = (v1[i] == v[j]) ? true : false;
             }
             
-            if(!repe && en_ambos){
+            if(!repe && en_ambos(v1, v2, n1, n2, v1[i])){
                 v[util] = v1[i];
                 util++;
             }
