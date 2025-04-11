@@ -6,7 +6,7 @@ GRUPO DE PRÁCTICAS: viernes
 
 #include <iostream>
 #include <cstdlib>
-#include "../include/funcArrays.h" // ! NO INCLUIR EN LA ENTREGA ASINNNN
+#include "funcArrays.h"
 
 using namespace std;
 

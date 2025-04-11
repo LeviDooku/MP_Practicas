@@ -21,7 +21,7 @@ LDFLAGS = -L$(LIB) -lfunc
 
 #Detectar Binarios
 
-CPP_SOURCE      = $(wildcard $(SRC)/ej*.cpp)
+CPP_SOURCE      = $(filter-out $(SRC)/funcArrays.cpp, $(wildcard $(SRC)/*.cpp))
 BINARIES        = $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(CPP_SOURCE))
 
 .PHONY: all clean mrproper genera_dir doc clean-doc
