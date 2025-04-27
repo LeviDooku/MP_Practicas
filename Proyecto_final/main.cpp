@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "Particula.h"
+#include "params.h"
 
 using namespace std;
 
@@ -88,6 +89,87 @@ void testCompleto(){
     cout << "=== Fin prueba completa ===\n" << endl;
 }
 
+// === Funciones de prueba ===
+
+// Prueba de toString()
+void testToString_P() {
+    cout << "\n=== Prueba toString() ===" << endl;
+    Particula p;
+    cout << "Particula creada: " << p.toString() << endl;
+    cout << "=== Fin prueba toString ===\n" << endl;
+}
+
+// Prueba de mover()
+void testMover() {
+    cout << "\n=== Prueba mover() ===" << endl;
+    Particula p(Vector2D(1, 1), Vector2D(0.5, 0.5), Vector2D(2, 2), 1, 0);
+    cout << "Antes de mover: " << p.toString() << endl;
+    p.mover();
+    cout << "Después de mover: " << p.toString() << endl;
+    cout << "=== Fin prueba mover ===\n" << endl;
+}
+
+// Prueba de rebotar()
+void testRebotar() {
+    cout << "\n=== Prueba rebotar() ===" << endl;
+    Particula p(Vector2D(MAX_X, MAX_Y), Vector2D(0, 0), Vector2D(5, 5), 1, 0);
+    cout << "Antes de rebotar: " << p.toString() << endl;
+    p.rebotar();
+    cout << "Después de rebotar: " << p.toString() << endl;
+    cout << "=== Fin prueba rebotar ===\n" << endl;
+}
+
+// Prueba de colision()
+void testColision() {
+    cout << "\n=== Prueba colision() ===" << endl;
+    Particula p1(Vector2D(5, 5), Vector2D(0, 0), Vector2D(0, 0), 2, 0);
+    Particula p2(Vector2D(6, 5), Vector2D(0, 0), Vector2D(0, 0), 2, 0);
+
+    cout << "Partícula 1: " << p1.toString() << endl;
+    cout << "Partícula 2: " << p2.toString() << endl;
+
+    if (p1.colision(p2))
+        cout << "-> Colisionan!" << endl;
+    else
+        cout << "-> No colisionan." << endl;
+        
+    cout << "=== Fin prueba colision ===\n" << endl;
+}
+
+// Prueba de choque()
+void testChoque() {
+    cout << "\n=== Prueba choque() ===" << endl;
+    Particula p1(Vector2D(2, 2), Vector2D(0.1, 0.1), Vector2D(1, 1), 1, 0);
+    Particula p2(Vector2D(5, 5), Vector2D(-0.2, -0.2), Vector2D(-1, -1), 1, 0);
+
+    cout << "Antes del choque:" << endl;
+    cout << "p1: " << p1.toString() << endl;
+    cout << "p2: " << p2.toString() << endl;
+
+    p1.choque(p2);
+
+    cout << "Después del choque:" << endl;
+    cout << "p1: " << p1.toString() << endl;
+    cout << "p2: " << p2.toString() << endl;
+
+    cout << "=== Fin prueba choque ===\n" << endl;
+}
+
+// Prueba general
+void testCompleto_P() {
+    cout << "\n=== Prueba completa ===" << endl;
+    Particula p(Vector2D(1, 1), Vector2D(0.5, 0.5), Vector2D(2, 2), 1, 0);
+    cout << "Estado inicial: " << p.toString() << endl;
+
+    p.mover();
+    cout << "Tras mover: " << p.toString() << endl;
+
+    p.rebotar();
+    cout << "Tras rebotar: " << p.toString() << endl;
+    
+    cout << "=== Fin prueba completa ===\n" << endl;
+}
+
 int main(){
     cout << "=== Inicio de pruebas de la clase Vector2D ===\n" << endl;
 
@@ -100,6 +182,18 @@ int main(){
     testCompleto();
 
     cout << "\n=== Fin de todas las pruebas ===" << endl;
+
+    cout << "=== Inicio de pruebas de la clase Particula ===\n" << endl;
+
+    testToString_P();
+    testMover();
+    testRebotar();
+    testColision();
+    testChoque();
+    testCompleto_P();
+
+    cout << "\n=== Fin de todas las pruebas ===" << endl;
+
     return 0;
 }
 

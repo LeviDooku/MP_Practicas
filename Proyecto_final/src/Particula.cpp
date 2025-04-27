@@ -65,4 +65,48 @@ float Particula::getRadio() const{
     return radio;
 }
 
-//Otros
+//Otros métodos
+
+void Particula::mover(){
+    veloc.sumar(acel);
+
+    if(veloc.getX() < -MAX_VEL) veloc.setX(-MAX_VEL);
+    if(veloc.getX() > MAX_VEL) veloc.setX(MAX_VEL);
+
+    if(veloc.getY() < -MAX_VEL) veloc.setY(-MAX_VEL);
+    if(veloc.getY() > MAX_VEL) veloc.setY(MAX_VEL);
+
+    pos.sumar(veloc);
+
+    if(pos.getX() < 0) pos.setX(0);
+    if(pos.getX() > MAX_X) pos.setX(MAX_X);
+    
+    if(pos.getY() < 0) pos.setY(0);
+    if(pos.getY() > MAX_Y) pos.setY(MAX_Y);
+}
+
+void Particula::rebotar(){
+    if(pos.getX() == MAX_X || pos.getX() == 0) 
+        veloc.setX(-veloc.getX());
+    else if(pos.getY() == MAX_Y || pos.getY() == 0)
+        veloc.setY(-veloc.getY());
+}
+
+bool Particula::colision(const Particula &otra) const{
+    return pos.distancia(otra.getPos()) <= radio + otra.getRadio();
+}
+
+void Particula::choque(Particula &otra){
+    Vector2D aux_vel = getVel();
+    Vector2D aux_acel = getAcel();
+
+    setVel(otra.getVel());
+    setAcel(otra.getAcel());
+
+    otra.setVel(aux_vel);
+    otra.setAcel(aux_acel);
+}
+
+std::string Particula::toString() const{
+    return "{ " + pos.toString() + ", " + veloc.toString() + ", " + acel.toString() + ", " + std::to_string(radio) + ", " + std::to_string(tipo) + " }";
+}
