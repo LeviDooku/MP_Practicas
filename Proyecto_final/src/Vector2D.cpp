@@ -7,20 +7,18 @@
 #include <cmath>
 #include "Vector2D.h"
 
-//Constructores
-
-Vector2D::Vector2D() : x(0), y(0) {}
+//Constructor
 
 Vector2D::Vector2D(float x, float y) : x(x), y(y) {}
 
 //Métodos set y get
 
 void Vector2D::setX(float new_x){
-    this->x = new_x;
+    x = new_x;
 }
 
 void Vector2D::setY(float new_y){
-    this->y = new_y;
+    y = new_y;
 }
 
 void Vector2D::setXY(float new_x, float new_y){

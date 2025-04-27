@@ -20,11 +20,6 @@ private:
 public:
 
     /**
-     * @brief Constructor por defecto
-     */
-    Vector2D();
-
-    /**
      * @brief Constructor con parámetros
      * @param x Componente x del vector, por defecto = 0
      * @param y Componente y del vector, por defecto = 0
@@ -33,20 +28,20 @@ public:
 
     /**
      * @brief Setea componente x del vector
-     * @param x Nuevo valor de la componente
+     * @param new_x Nuevo valor de la componente
      */
     void setX(float new_x);
     
     /**
      * @brief Setea componente y del vector
-     * @param y Nuevo valor de la componente
+     * @param new_y Nuevo valor de la componente
      */
     void setY(float new_y);
 
     /**
      * @brief Setea componente x e y del vector
-     * @param x Nuevo valor de la componente x
-     * @param y Nuevo valor de la componente y
+     * @param new_x Nuevo valor de la componente x
+     * @param new_y Nuevo valor de la componente y
      */
     void setXY(float new_x, float new_y);
 
