@@ -107,6 +107,9 @@ void Particula::choque(Particula &otra){
     otra.setAcel(aux_acel);
 }
 
+//TODO Terminar implementación!!!!
+void Particula::wrap(){}
+
 std::string Particula::toString() const{
     return "{ " + pos.toString() + ", " + veloc.toString() + ", " + acel.toString() + ", " + std::to_string(radio) + ", " + std::to_string(tipo) + " }";
 }
