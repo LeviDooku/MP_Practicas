@@ -111,7 +111,7 @@ public:
     void choque(Particula &otra);
 
     /**
-     * @brief Cambiar la posición de una partícula de forma que al llegar a uno de los lados, sale por el otro
+     * @brief Cambiar la posición de una partícula de forma que al llegar a uno de los lados, sale por el otro.
      */
     void wrap();
 

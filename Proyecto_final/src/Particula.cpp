@@ -107,8 +107,12 @@ void Particula::choque(Particula &otra){
     otra.setAcel(aux_acel);
 }
 
-//TODO Terminar implementación!!!!
-void Particula::wrap(){}
+void Particula::wrap(){
+    if(pos.getX() == 0) pos.setX(MAX_X - radio);
+    if(pos.getX() == MAX_X) pos.setX(radio);
+    if(pos.getY() == 0) pos.setY(MAX_Y - radio); 
+    if(pos.getY() == MAX_Y) pos.setY(radio);
+}
 
 std::string Particula::toString() const{
     return "{ " + pos.toString() + ", " + veloc.toString() + ", " + acel.toString() + ", " + std::to_string(radio) + ", " + std::to_string(tipo) + " }";
