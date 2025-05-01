@@ -45,6 +45,12 @@ public:
      * @return Cantidad de partículas del conjunto
      */
     int getUtiles() const;
+
+    /**
+     * @brief Redimensiona el array dinámico de Partícula
+     * @param new_cap Nueva capacidad del array
+     */
+    void redimensiona(const int new_cap);
     
     /**
      * @brief Agrega una partícula al conjunto. Si no hay hueco, redimensiona la capacidad

@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include "ConjuntoParticulas.h"
-//#include "Particula.h"
 
 ConjuntoParticulas::ConjuntoParticulas(const int n){
     if(n > 0){
@@ -29,19 +28,38 @@ ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &otro){ // ? No 
 }
 
 ConjuntoParticulas::~ConjuntoParticulas(){
-
+    delete [] set;
+    set = nullptr;
 }
 
 int ConjuntoParticulas::getUtiles() const{
     return utiles;
 }
 
-void ConjuntoParticulas::agrega(const Particula &a_agregar){
+void ConjuntoParticulas::redimensiona(const int new_cap){
+    Particula *set_amplido = new Particula[new_cap];
 
+    for(int i = 0; i < utiles; ++i)
+        set_amplido[i] = set[i];
+
+    delete [] set;
+    set = set_amplido;
+    capacidad = new_cap;
+}
+
+void ConjuntoParticulas::agrega(const Particula &a_agregar){
+    if(capacidad == utiles){
+        redimensiona(capacidad + TAM_BLOQUE);
+    }
+    set[utiles++] = a_agregar;        
 }
 
 void ConjuntoParticulas::borrar(const int pos){
-
+    if(pos >= 0 && pos < utiles){
+        set[pos] = set[--utiles];
+        if((capacidad - utiles) > TAM_BLOQUE)
+            redimensiona(utiles);
+    }
 }
 
 Particula& ConjuntoParticulas::obtener(const int pos){
