@@ -5,6 +5,7 @@
 ///////////////////////////////////
 
 #include <iostream>
+#include <sstream>
 #include "ConjuntoParticulas.h"
 
 ConjuntoParticulas::ConjuntoParticulas(const int n){
@@ -63,21 +64,56 @@ void ConjuntoParticulas::borrar(const int pos){
 }
 
 Particula& ConjuntoParticulas::obtener(const int pos){
-    return set[pos]; 
+    if(pos >= 0 && pos < utiles)
+        return set[pos]; 
 }
 
 void ConjuntoParticulas::reemplazar(const Particula &sustituta, const int pos){
-
+    if(pos >= 0 && pos < utiles)
+        set[pos] = sustituta;
 }
 
 void ConjuntoParticulas::mover(int tipo){
-
+    switch(tipo){
+        default:
+        case 0:
+            for(int i = 0; i < utiles; ++i)
+                set[i].mover();
+            break;
+        case 1:
+            for(int i = 0; i < utiles; ++i){
+                set[i].mover();
+                set[i].rebotar();
+            }
+            break;
+        case 2:
+            for(int i = 0; i < utiles; ++i){
+                set[i].mover();
+                set[i].wrap();
+            }
+            break;
+    }
 }
 
 void ConjuntoParticulas::gestionarColisiones(){
+    for(int i = 0; i < utiles; ++i){
+        for(int j = i + 1; j < utiles; ++j){
+            if(set[i].colision(set[j]))
+                set[i].choque(set[j]);
+        }
+    }
 
 }
 
+// ! NO SÉ Si ESTÁ BIEN; PREGUNTAR PROFE
 std::string ConjuntoParticulas::toString() const{
+    std::ostringstream oss;
 
+    oss << "Capacidad: " << capacidad << "\n";
+    oss << "Número de partículas: " << utiles << "\n";
+
+    for (int i = 0; i < utiles; ++i)
+        oss << set[i].toString() << "\n";
+
+    return oss.str();
 }

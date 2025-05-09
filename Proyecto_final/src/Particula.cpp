@@ -10,7 +10,7 @@
 //Constructores
 
 Particula::Particula(const int tipoPart){
-    if(tipoPart != 0){
+    if(tipoPart == 0){
         radio = 3;
         tipo = tipoPart;
     }

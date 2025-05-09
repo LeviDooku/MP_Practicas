@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "Particula.h"
+#include "ConjuntoParticulas.h"
 #include "params.h"
 
 using namespace std;
@@ -170,6 +171,82 @@ void testCompleto_P() {
     cout << "=== Fin prueba completa ===\n" << endl;
 }
 
+// Prueba de toString()
+void testToString_C() {
+    cout << "\n=== Prueba toString() ===" << endl;
+    ConjuntoParticulas c(3);
+    cout << c.toString();
+    cout << "=== Fin prueba toString ===\n" << endl;
+}
+
+// Prueba de agrega()
+void testAgrega() {
+    cout << "\n=== Prueba agrega() ===" << endl;
+    ConjuntoParticulas c;
+    Particula p;
+    c.agrega(p);
+    c.agrega(p);
+    c.agrega(p);
+    c.agrega(p); // debería forzar una redimensión
+    cout << c.toString();
+    cout << "=== Fin prueba agrega ===\n" << endl;
+}
+
+// Prueba de borrar()
+void testBorrar() {
+    cout << "\n=== Prueba borrar() ===" << endl;
+    ConjuntoParticulas c(4);
+    cout << "Antes de borrar:\n" << c.toString();
+    c.borrar(1);
+    cout << "Después de borrar la posición 1:\n" << c.toString();
+    cout << "=== Fin prueba borrar ===\n" << endl;
+}
+
+// Prueba de obtener()
+void testObtener() {
+    cout << "\n=== Prueba obtener() ===" << endl;
+    ConjuntoParticulas c(1);
+    Particula &p = c.obtener(0);
+    cout << "Partícula obtenida: " << p.toString() << endl;
+    cout << "=== Fin prueba obtener ===\n" << endl;
+}
+
+// Prueba de reemplazar()
+void testReemplazar() {
+    cout << "\n=== Prueba reemplazar() ===" << endl;
+    ConjuntoParticulas c(2);
+    Particula nueva(Vector2D(9, 9), Vector2D(0, 0), Vector2D(0, 0), 3, 1);
+    cout << "Antes de reemplazar:\n" << c.toString();
+    c.reemplazar(nueva, 0);
+    cout << "Después de reemplazar la posición 0:\n" << c.toString();
+    cout << "=== Fin prueba reemplazar ===\n" << endl;
+}
+
+// Prueba de mover()
+void testMoverConjunto() {
+    cout << "\n=== Prueba mover() con tipo 2 (wrap) ===" << endl;
+    ConjuntoParticulas c(3);
+    cout << "Antes de mover:\n" << c.toString();
+    c.mover(2);
+    cout << "Después de mover:\n" << c.toString();
+    cout << "=== Fin prueba mover ===\n" << endl;
+}
+
+// Prueba de gestionarColisiones()
+void testGestionarColisiones() {
+    cout << "\n=== Prueba gestionarColisiones() ===" << endl;
+    ConjuntoParticulas c;
+    // Crear dos partículas que colisionan
+    Particula p1(Vector2D(5, 5), Vector2D(0, 0), Vector2D(1, 1), 2, 0);
+    Particula p2(Vector2D(6, 5), Vector2D(0, 0), Vector2D(-1, -1), 2, 0);
+    c.agrega(p1);
+    c.agrega(p2);
+    cout << "Antes de gestionar colisiones:\n" << c.toString();
+    c.gestionarColisiones();
+    cout << "Después de gestionar colisiones:\n" << c.toString();
+    cout << "=== Fin prueba gestionarColisiones ===\n" << endl;
+}
+
 int main(){
     cout << "=== Inicio de pruebas de la clase Vector2D ===\n" << endl;
 
@@ -191,6 +268,18 @@ int main(){
     testColision();
     testChoque();
     testCompleto_P();
+
+    cout << "\n=== Fin de todas las pruebas ===" << endl;
+
+    cout << "=== Inicio de pruebas de la clase ConjuntoParticulas ===\n" << endl;
+
+    testToString_C();
+    testAgrega();
+    testBorrar();
+    testObtener();
+    testReemplazar();
+    testMoverConjunto();
+    testGestionarColisiones();
 
     cout << "\n=== Fin de todas las pruebas ===" << endl;
 
