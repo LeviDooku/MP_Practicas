@@ -1,6 +1,6 @@
 ///////////////////////////////////
 // Proyecto final                //
-// file: ConjuntoParticulas.h    //
+// file: ConjuntoParticula.h    //
 // Pedro Velasco Santana         //
 ///////////////////////////////////
 
@@ -47,6 +47,12 @@ public:
     int getUtiles() const;
 
     /**
+     * @brief Devuelve la capacidad del array Partículas en el conjunto
+     * @return Capacidad de partículas del conjunto
+     */    
+    int getCapacidad() const;
+
+    /**
      * @brief Redimensiona el array dinámico de Partícula
      * @param new_cap Nueva capacidad del array
      */
@@ -56,27 +62,27 @@ public:
      * @brief Agrega una partícula al conjunto. Si no hay hueco, redimensiona la capacidad
      * @param a_agregar Particula a añadir
      */
-    void agrega(const Particula &a_agregar);
+    void agregar(const Particula &a_agregar);
 
     /**
      * @brief Borra la particula de una posición concreta
      * @param pos Posición del array en el que se realiza el borrado
      */
-    void borrar(const int pos);
+    void borrar(int pos);
 
     /**
      * @brief Devuelve una referencia al elemento de una posición concreta
      * @param pos Posición del elemento
      * @return Referencia al elemento pos
      */
-    Particula& obtener(const int pos); 
+    Particula& obtener(int pos); 
 
     /**
      * @brief Reemplaza un elemento concreto de un array con otro
      * @param sustituta Elemento a reemplazar
      * @param pos Posición en la que se realiza el reemplazo
      */
-    void reemplazar(const Particula &sustituta, const int pos);
+    void reemplazar(const Particula &sustituta, int pos);
 
     /**
      * @brief Mueve las Partículas del conjunto en base a un tipo

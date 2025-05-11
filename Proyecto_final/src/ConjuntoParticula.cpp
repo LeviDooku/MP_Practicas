@@ -1,14 +1,14 @@
 ///////////////////////////////////
 // Proyecto final                //
-// file: ConjuntoParticulas.cpp  //
+// file: ConjuntoParticula.cpp  //
 // Pedro Velasco Santana         //
 ///////////////////////////////////
 
 #include <iostream>
-#include <sstream>
-#include "ConjuntoParticulas.h"
+#include <cassert>
+#include "ConjuntoParticula.h"
 
-ConjuntoParticulas::ConjuntoParticulas(const int n){
+ConjuntoParticulas::ConjuntoParticulas(const int n){ // ? BIEN ? Sobretodo con el const
     if(n > 0){
         set = new Particula[n];
         capacidad = n;
@@ -37,6 +37,10 @@ int ConjuntoParticulas::getUtiles() const{
     return utiles;
 }
 
+int ConjuntoParticulas::getCapacidad() const{
+    return capacidad;
+}
+
 void ConjuntoParticulas::redimensiona(const int new_cap){
     Particula *set_amplido = new Particula[new_cap];
 
@@ -48,27 +52,26 @@ void ConjuntoParticulas::redimensiona(const int new_cap){
     capacidad = new_cap;
 }
 
-void ConjuntoParticulas::agrega(const Particula &a_agregar){
-    if(capacidad == utiles){
+void ConjuntoParticulas::agregar(const Particula &a_agregar){
+    if(capacidad == utiles)
         redimensiona(capacidad + TAM_BLOQUE);
-    }
     set[utiles++] = a_agregar;        
 }
 
-void ConjuntoParticulas::borrar(const int pos){
+void ConjuntoParticulas::borrar(int pos){
     if(pos >= 0 && pos < utiles){
         set[pos] = set[--utiles];
-        if((capacidad - utiles) > TAM_BLOQUE)
+        if((capacidad - utiles) >= TAM_BLOQUE)
             redimensiona(utiles);
     }
 }
 
-Particula& ConjuntoParticulas::obtener(const int pos){
-    if(pos >= 0 && pos < utiles)
-        return set[pos]; 
+Particula& ConjuntoParticulas::obtener(int pos) {
+    assert(pos >= 0 && pos < utiles && "Índice fuera de rango en obtener()");
+    return set[pos];
 }
 
-void ConjuntoParticulas::reemplazar(const Particula &sustituta, const int pos){
+void ConjuntoParticulas::reemplazar(const Particula &sustituta, int pos){
     if(pos >= 0 && pos < utiles)
         set[pos] = sustituta;
 }
@@ -102,18 +105,18 @@ void ConjuntoParticulas::gestionarColisiones(){
                 set[i].choque(set[j]);
         }
     }
-
 }
 
-// ! NO SÉ Si ESTÁ BIEN; PREGUNTAR PROFE
-std::string ConjuntoParticulas::toString() const{
-    std::ostringstream oss;
+//CORREGIRRR O MODIFICAR!!
+std::string ConjuntoParticulas::toString() const {
+    std::string result = "";
 
-    oss << "Capacidad: " << capacidad << "\n";
-    oss << "Número de partículas: " << utiles << "\n";
+    result += "Capacidad: " + std::to_string(capacidad) + "\n";
+    result += "Número de partículas: " + std::to_string(utiles) + "\n";
 
-    for (int i = 0; i < utiles; ++i)
-        oss << set[i].toString() << "\n";
+    for (int i = 0; i < utiles; ++i) {
+        result += set[i].toString() + "\n";
+    }
 
-    return oss.str();
+    return result;
 }

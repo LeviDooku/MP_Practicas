@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "Particula.h"
-#include "ConjuntoParticulas.h"
+#include "ConjuntoParticula.h"
 #include "params.h"
 
 using namespace std;
@@ -179,15 +179,15 @@ void testToString_C() {
     cout << "=== Fin prueba toString ===\n" << endl;
 }
 
-// Prueba de agrega()
-void testAgrega() {
-    cout << "\n=== Prueba agrega() ===" << endl;
+// Prueba de agregar()
+void testAgregar() {
+    cout << "\n=== Prueba agregar() ===" << endl;
     ConjuntoParticulas c;
     Particula p;
-    c.agrega(p);
-    c.agrega(p);
-    c.agrega(p);
-    c.agrega(p); // debería forzar una redimensión
+    c.agregar(p);
+    c.agregar(p);
+    c.agregar(p);
+    c.agregar(p); // debería forzar una redimensión
     cout << c.toString();
     cout << "=== Fin prueba agrega ===\n" << endl;
 }
@@ -239,8 +239,8 @@ void testGestionarColisiones() {
     // Crear dos partículas que colisionan
     Particula p1(Vector2D(5, 5), Vector2D(0, 0), Vector2D(1, 1), 2, 0);
     Particula p2(Vector2D(6, 5), Vector2D(0, 0), Vector2D(-1, -1), 2, 0);
-    c.agrega(p1);
-    c.agrega(p2);
+    c.agregar(p1);
+    c.agregar(p2);
     cout << "Antes de gestionar colisiones:\n" << c.toString();
     c.gestionarColisiones();
     cout << "Después de gestionar colisiones:\n" << c.toString();
@@ -274,7 +274,7 @@ int main(){
     cout << "=== Inicio de pruebas de la clase ConjuntoParticulas ===\n" << endl;
 
     testToString_C();
-    testAgrega();
+    testAgregar();
     testBorrar();
     testObtener();
     testReemplazar();
