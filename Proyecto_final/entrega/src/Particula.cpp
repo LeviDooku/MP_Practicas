@@ -1,8 +1,8 @@
-////////////////////////////////
-// Proyecto final             //
-// file: Particula.cpp        //
-// Pedro Velasco Santana      //
-////////////////////////////////
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
+*/
 
 #include "Particula.h"
 #include "params.h"

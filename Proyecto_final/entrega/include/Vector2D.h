@@ -1,8 +1,8 @@
-////////////////////////////////
-// Proyecto final             //
-// file: Vector2D.h           //
-// Pedro Velasco Santana      //
-////////////////////////////////
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
+*/
 
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
