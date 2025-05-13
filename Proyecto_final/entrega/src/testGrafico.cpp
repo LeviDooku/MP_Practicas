@@ -1,8 +1,8 @@
-#include "../include/Particula.h" // ! NO ENTREGAR ASÍ
-#include "../include/Vector2D.h"// ! NO ENTREGAR ASÍ
-#include "../include/ConjuntoParticula.h"// ! NO ENTREGAR ASÍ
-#include "../include/params.h" // ! NO ENTREGAR ASÍ
-#include "../include/raylib.h"
+#include "Particula.h"
+#include "Vector2D.h"
+#include "ConjuntoParticula.h"
+#include "params.h"
+#include "raylib.h"
 #include <iostream>
 
 const int screenWidth = MAX_X;

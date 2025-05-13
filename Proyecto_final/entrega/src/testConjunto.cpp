@@ -8,9 +8,9 @@
  #include "doctest.h"
  
  #include <iostream>
- #include "../include/Particula.h" // ! NO ENTREGAR ASÍ
- #include "../include/Vector2D.h"// ! NO ENTREGAR ASÍ
- #include "../include/ConjuntoParticula.h"// ! NO ENTREGAR ASÍ
+ #include "Particula.h"
+ #include "Vector2D.h"
+ #include "ConjuntoParticula.h"
  #include <cstring>
  
  using namespace std;
