@@ -1,8 +1,8 @@
-////////////////////////////////
-// Proyecto final             //
-// file: params.h             //
-// Pedro Velasco Santana      //
-////////////////////////////////
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
+*/
 
 #ifndef PARAMS_H
 #define PARAMS_H

@@ -16,11 +16,11 @@ GRUPO DE PRÁCTICAS: viernes
  */
 class Particula{
 private:
-    Vector2D pos; ///< Posición de la particula
+    Vector2D pos;   ///< Posición de la particula
     Vector2D acel;  ///< Aceleración de la particula
     Vector2D veloc; ///< Velocidad de la particula
-    float radio;   ///< Radio de la particula
-    int tipo;   ///< tipo de la particula
+    float radio;    ///< Radio de la particula
+    int tipo;       ///< tipo de la particula
 
 public:
 

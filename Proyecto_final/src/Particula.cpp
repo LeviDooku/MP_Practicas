@@ -1,11 +1,12 @@
-////////////////////////////////
-// Proyecto final             //
-// file: Particula.cpp        //
-// Pedro Velasco Santana      //
-////////////////////////////////
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
+*/
 
 #include "Particula.h"
 #include "params.h"
+#include <iostream>
 
 //Constructores
 
@@ -79,17 +80,21 @@ void Particula::mover(){
     pos.sumar(veloc);
 
     if(pos.getX() < 0) pos.setX(0);
-    if(pos.getX() > MAX_X) pos.setX(MAX_X);
+    if(pos.getX() > MAX_X) pos.setX(MAX_X - radio);
     
     if(pos.getY() < 0) pos.setY(0);
-    if(pos.getY() > MAX_Y) pos.setY(MAX_Y);
+    if(pos.getY() > MAX_Y) pos.setY(MAX_Y - radio);
 }
 
 void Particula::rebotar(){
-    if(pos.getX() == MAX_X || pos.getX() == 0) 
+    if(pos.getX() + radio >= MAX_X || pos.getX() - radio <= 0){
         veloc.setX(-veloc.getX());
-    else if(pos.getY() == MAX_Y || pos.getY() == 0)
+        acel.setX(-acel.getX());
+    }
+    else if(pos.getY() + radio >= MAX_Y || pos.getY() - radio <= 0){
         veloc.setY(-veloc.getY());
+        acel.setY(-acel.getY());
+    }
 }
 
 bool Particula::colision(const Particula &otra) const{
@@ -108,10 +113,11 @@ void Particula::choque(Particula &otra){
 }
 
 void Particula::wrap(){
-    if(pos.getX() == 0) pos.setX(MAX_X - radio);
-    if(pos.getX() == MAX_X) pos.setX(radio);
-    if(pos.getY() == 0) pos.setY(MAX_Y - radio); 
-    if(pos.getY() == MAX_Y) pos.setY(radio);
+    if(pos.getX() - radio <= 0) pos.setX(MAX_X - radio - 1);
+    if(pos.getX() + radio >= MAX_X) pos.setX(radio + 1);
+
+    if(pos.getY() - radio <= 0) pos.setY(MAX_Y - radio - 1); 
+    if(pos.getY() + radio >= MAX_Y) pos.setY(radio + 1);
 }
 
 std::string Particula::toString() const{

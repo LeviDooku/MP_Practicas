@@ -17,9 +17,9 @@ const int TAM_BLOQUE = 3;
  */
 class ConjuntoParticulas{
 private:
-    Particula *set = nullptr; ///< Array de Particulas
-    int capacidad = 0; ///< Capacidad del array
-    int utiles  = 0; ///< Posiciones ocupadas
+    Particula *set = nullptr;   ///< Array de Particulas
+    int capacidad = 0;          ///< Capacidad del array
+    int utiles  = 0;            ///< Posiciones ocupadas
 
 public:
     
@@ -75,7 +75,7 @@ public:
      * @param pos Posición del elemento
      * @return Referencia al elemento pos
      */
-    Particula& obtener(int pos); 
+    Particula& obtener(int pos) const; 
 
     /**
      * @brief Reemplaza un elemento concreto de un array con otro

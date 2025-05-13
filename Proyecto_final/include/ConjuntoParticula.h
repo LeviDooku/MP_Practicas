@@ -1,8 +1,8 @@
-///////////////////////////////////
-// Proyecto final                //
-// file: ConjuntoParticula.h    //
-// Pedro Velasco Santana         //
-///////////////////////////////////
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
+*/
 
 #ifndef CONJUNTOPARTICULAS_H
 #define CONJUNTOPARTICULAS_H
@@ -75,7 +75,7 @@ public:
      * @param pos Posición del elemento
      * @return Referencia al elemento pos
      */
-    Particula& obtener(int pos); 
+    Particula& obtener(int pos) const; 
 
     /**
      * @brief Reemplaza un elemento concreto de un array con otro

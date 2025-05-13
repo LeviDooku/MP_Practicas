@@ -1,8 +1,8 @@
-///////////////////////////////////
-// Proyecto final                //
-// file: ConjuntoParticula.cpp  //
-// Pedro Velasco Santana         //
-///////////////////////////////////
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
+*/
 
 #include <iostream>
 #include <cassert>
@@ -66,7 +66,7 @@ void ConjuntoParticulas::borrar(int pos){
     }
 }
 
-Particula& ConjuntoParticulas::obtener(int pos) {
+Particula& ConjuntoParticulas::obtener(int pos) const{
     assert(pos >= 0 && pos < utiles && "Índice fuera de rango en obtener()");
     return set[pos];
 }

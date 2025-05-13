@@ -6,6 +6,7 @@ GRUPO DE PRÁCTICAS: viernes
 
 #include "Particula.h"
 #include "params.h"
+#include <iostream>
 
 //Constructores
 
@@ -67,6 +68,7 @@ float Particula::getRadio() const{
 
 //Otros métodos
 
+// TODO Modularizar condifionales
 void Particula::mover(){
     veloc.sumar(acel);
 
@@ -79,17 +81,21 @@ void Particula::mover(){
     pos.sumar(veloc);
 
     if(pos.getX() < 0) pos.setX(0);
-    if(pos.getX() > MAX_X) pos.setX(MAX_X);
+    if(pos.getX() > MAX_X) pos.setX(MAX_X - radio);
     
     if(pos.getY() < 0) pos.setY(0);
-    if(pos.getY() > MAX_Y) pos.setY(MAX_Y);
+    if(pos.getY() > MAX_Y) pos.setY(MAX_Y - radio);
 }
 
 void Particula::rebotar(){
-    if(pos.getX() == MAX_X || pos.getX() == 0) 
+    if(pos.getX() + radio >= MAX_X || pos.getX() - radio <= 0){
         veloc.setX(-veloc.getX());
-    else if(pos.getY() == MAX_Y || pos.getY() == 0)
+        acel.setX(-acel.getX());
+    }
+    else if(pos.getY() + radio >= MAX_Y || pos.getY() - radio <= 0){
         veloc.setY(-veloc.getY());
+        acel.setY(-acel.getY());
+    }
 }
 
 bool Particula::colision(const Particula &otra) const{
@@ -108,10 +114,12 @@ void Particula::choque(Particula &otra){
 }
 
 void Particula::wrap(){
-    if(pos.getX() == 0) pos.setX(MAX_X - radio);
-    if(pos.getX() == MAX_X) pos.setX(radio);
-    if(pos.getY() == 0) pos.setY(MAX_Y - radio); 
-    if(pos.getY() == MAX_Y) pos.setY(radio);
+    const int epsilon = 1;
+    if(pos.getX() - radio <= 0) pos.setX(MAX_X - radio - epsilon);
+    if(pos.getX() + radio >= MAX_X) pos.setX(radio + epsilon);
+
+    if(pos.getY() - radio <= 0) pos.setY(MAX_Y - radio - epsilon); 
+    if(pos.getY() + radio >= MAX_Y) pos.setY(radio + epsilon);
 }
 
 std::string Particula::toString() const{
