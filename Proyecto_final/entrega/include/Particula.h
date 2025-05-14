@@ -22,6 +22,44 @@ private:
     float radio;    ///< Radio de la particula
     int tipo;       ///< tipo de la particula
 
+    /**
+     * @brief Comprueba si la posición de la partícula supera el límite izquierdo
+     * @param epsilon Resta un valor determinado al cálculo
+     * @return True si pasa el límite, false en caso contrario
+     */
+    bool lim_izq(const float epsilon = 0);
+
+    /**
+     * @brief Comprueba si la posición de la partícula supera el límite derecho
+     * @param epsilon Suma un valor determinado al cálculo
+     * @return True si pasa el límite, false en caso contrario
+     */
+    bool lim_dcha(const float epsilon = 0);
+
+    /**
+     * @brief Comprueba si la posición de la partícula supera el límite superior
+     * @param epsilon Suma un valor determinado al cálculo
+     * @return True si pasa el límite, false en caso contrario
+     */
+    bool lim_arriba(const float epsilon = 0);
+
+    /**
+     * @brief Comprueba si la posición de la partícula supera el límite inferior
+     * @param epsilon Resta un valor determinado al cálculo
+     * @return True si pasa el límite, false en caso contrario
+     */
+    bool lim_abajo(const float epsilon = 0);
+
+    /**
+     * @brief Corrige la posición de una partícula
+     */
+    void corregir_pos();
+
+    /**
+     * @brief Limita la velocidad de una párticula en base a su velocidad actual
+     */
+    void limitar_velocidad();
+
 public:
 
     /**

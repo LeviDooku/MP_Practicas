@@ -8,6 +8,41 @@ GRUPO DE PRÁCTICAS: viernes
 #include "params.h"
 #include <iostream>
 
+//Métodos privados
+
+bool Particula::lim_izq(const float epsilon){
+    return pos.getX() - epsilon <= 0;
+}
+
+bool Particula::lim_dcha(const float epsilon){
+    return pos.getX() + epsilon >= MAX_X;
+}
+
+bool Particula::lim_arriba(const float epsilon){
+    return pos.getY() + epsilon >= MAX_Y;
+}
+
+bool Particula::lim_abajo(const float epsilon){
+    return pos.getY() - epsilon <= 0;
+}
+
+void Particula::corregir_pos(){
+    if(lim_izq()) pos.setX(0);
+    if(lim_dcha()) pos.setX(MAX_X - radio);
+    
+    if(lim_abajo()) pos.setY(0);
+    if(lim_arriba()) pos.setY(MAX_Y - radio);   
+}
+
+void Particula::limitar_velocidad(){
+    if(veloc.getX() < -MAX_VEL) veloc.setX(-MAX_VEL);
+    if(veloc.getX() > MAX_VEL) veloc.setX(MAX_VEL);
+
+    if(veloc.getY() < -MAX_VEL) veloc.setY(-MAX_VEL);
+    if(veloc.getY() > MAX_VEL) veloc.setY(MAX_VEL);
+}
+
+
 //Constructores
 
 Particula::Particula(const int tipoPart){
@@ -68,31 +103,22 @@ float Particula::getRadio() const{
 
 //Otros métodos
 
-// TODO Modularizar condifionales
 void Particula::mover(){
     veloc.sumar(acel);
 
-    if(veloc.getX() < -MAX_VEL) veloc.setX(-MAX_VEL);
-    if(veloc.getX() > MAX_VEL) veloc.setX(MAX_VEL);
-
-    if(veloc.getY() < -MAX_VEL) veloc.setY(-MAX_VEL);
-    if(veloc.getY() > MAX_VEL) veloc.setY(MAX_VEL);
+    limitar_velocidad();
 
     pos.sumar(veloc);
 
-    if(pos.getX() < 0) pos.setX(0);
-    if(pos.getX() > MAX_X) pos.setX(MAX_X - radio);
-    
-    if(pos.getY() < 0) pos.setY(0);
-    if(pos.getY() > MAX_Y) pos.setY(MAX_Y - radio);
+    corregir_pos();
 }
 
 void Particula::rebotar(){
-    if(pos.getX() + radio >= MAX_X || pos.getX() - radio <= 0){
+    if(lim_izq(radio) || lim_dcha(radio)){
         veloc.setX(-veloc.getX());
         acel.setX(-acel.getX());
     }
-    else if(pos.getY() + radio >= MAX_Y || pos.getY() - radio <= 0){
+    else if(lim_abajo(radio) || lim_arriba(radio)){
         veloc.setY(-veloc.getY());
         acel.setY(-acel.getY());
     }
@@ -115,11 +141,11 @@ void Particula::choque(Particula &otra){
 
 void Particula::wrap(){
     const int epsilon = 1;
-    if(pos.getX() - radio <= 0) pos.setX(MAX_X - radio - epsilon);
-    if(pos.getX() + radio >= MAX_X) pos.setX(radio + epsilon);
+    if(lim_izq(radio)) pos.setX(MAX_X - radio - epsilon);
+    if(lim_dcha(radio)) pos.setX(radio + epsilon);
 
-    if(pos.getY() - radio <= 0) pos.setY(MAX_Y - radio - epsilon); 
-    if(pos.getY() + radio >= MAX_Y) pos.setY(radio + epsilon);
+    if(lim_abajo(radio)) pos.setY(MAX_Y - radio - epsilon); 
+    if(lim_arriba(radio)) pos.setY(radio + epsilon);
 }
 
 std::string Particula::toString() const{

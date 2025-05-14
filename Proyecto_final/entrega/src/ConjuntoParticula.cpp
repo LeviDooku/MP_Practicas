@@ -7,7 +7,7 @@ GRUPO DE PRÁCTICAS: viernes
 #include <cassert>
 #include "ConjuntoParticula.h"
 
-ConjuntoParticulas::ConjuntoParticulas(const int n){ // ? BIEN ? Sobretodo con el const
+ConjuntoParticulas::ConjuntoParticulas(const int n){
     if(n > 0){
         set = new Particula[n];
         capacidad = n;
@@ -18,7 +18,7 @@ ConjuntoParticulas::ConjuntoParticulas(const int n){ // ? BIEN ? Sobretodo con e
     }
 }
 
-ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &otro){ // ? No deberían tmb copiarse la cap??
+ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &otro){
     capacidad = otro.capacidad;
     utiles = otro.utiles;
     set = new Particula[capacidad];
@@ -106,7 +106,6 @@ void ConjuntoParticulas::gestionarColisiones(){
     }
 }
 
-//CORREGIRRR O MODIFICAR!!
 std::string ConjuntoParticulas::toString() const {
     std::string result = "";
 
