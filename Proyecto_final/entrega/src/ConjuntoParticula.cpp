@@ -106,7 +106,7 @@ void ConjuntoParticulas::gestionarColisiones(){
     }
 }
 
-std::string ConjuntoParticulas::toString() const {
+std::string ConjuntoParticulas::toString() const{
     std::string result = "";
 
     result += "Capacidad: " + std::to_string(capacidad) + "\n";

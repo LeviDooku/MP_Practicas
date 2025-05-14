@@ -42,7 +42,6 @@ void Particula::limitar_velocidad(){
     if(veloc.getY() > MAX_VEL) veloc.setY(MAX_VEL);
 }
 
-
 //Constructores
 
 Particula::Particula(const int tipoPart){
