@@ -139,7 +139,7 @@ public:
 std::ostream& operator<<(std::ostream &flujo, const Particula &p);
 
 /**
- * @brief Sobrecarga del operador >> para mostrar un objeto de la clase Particula
+ * @brief Sobrecarga del operador >> para leer un objeto de la clase Particula
  * @param flujo Flujo de entrada
  * @param v Objeto Particula que se desea leer
  * @return Referencia al flujo de entrada

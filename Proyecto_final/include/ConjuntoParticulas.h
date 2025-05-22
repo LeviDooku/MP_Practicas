@@ -7,6 +7,7 @@ GRUPO DE PRÁCTICAS: viernes
 #ifndef CONJUNTOPARTICULAS_H
 #define CONJUNTOPARTICULAS_H
 
+#include <iostream>
 #include "Particula.h"
 
 const int TAM_BLOQUE = 3;
@@ -111,8 +112,34 @@ public:
  */
 ConjuntoParticulas& operator=(const ConjuntoParticulas &otro);
 
+/**
+ * @brief Sobrecarga del operador de suma y asignación
+ * @param p Particula que se quiere agregar al conjunto
+ * @return Referencia al objeto actual
+ */
 ConjuntoParticulas& operator+=(const Particula &p);
 
+/**
+ * @brief Sobrecarga del operador de suma y asignación
+ * @param cp ConjuntoParticula que se quiere agregar al conjunto actual
+ * @return Referencia al objeto actual
+ */
 ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp);
+
+/**
+ * @brief Sobrecarga del operador << para mostrar un objeto de la clase Particula
+ * @param flujo Flujo de salida
+ * @param cp Objeto ConjuntoParticula que se desea mostrar
+ * @return Referencia al flujo de salida
+ */
+std::ostream& operator<<(std::ostream &flujo, const ConjuntoParticulas &cp);
+
+/**
+ * @brief Sobrecarga del operador >> para leer un objeto de la clase Particula
+ * @param flujo Flujo de entrada
+ * @param cp Objeto ConjuntoParticulas que se desea leer
+ * @return Referencia al flujo de entrada
+ */
+std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp);
 
 #endif //CONJUNTOPARTICULAS_H

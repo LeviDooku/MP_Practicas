@@ -148,3 +148,34 @@ ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp){
     
     return *this;
 }
+
+std::ostream& operator<<(std::ostream &flujo, const ConjuntoParticulas &cp){
+    flujo << "@Particula: " << cp.getUtiles << '\n';
+
+    for(int i = 0; i < cp.getUtiles(); ++i)
+        flujo << "p" << (i + 1) << ": " <<  cp.obtener(i) << "\n";
+    
+    return flujo;
+}
+
+std::ostream& operator>>(std::ostream &flujo, ConjuntoParticulas &cp){
+    std::string cabecera;
+    int numParticulas;
+
+    flujo >> cabecera >> numParticulas;
+
+    while(cp.getUtiles() > 0)
+        cp.borrar(0);
+
+    for(int i = 0; i < cp.getCapacidad(); ++i){
+        std::string etiqueta;
+        flujo >> etiqueta;
+        
+        Particula p;
+        flujo >> p;
+
+        cp.agregar(p);
+    }
+
+    return flujo;
+}
