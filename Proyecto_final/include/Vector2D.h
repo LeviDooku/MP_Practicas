@@ -7,7 +7,11 @@ GRUPO DE PRÁCTICAS: viernes
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
 
+#include <iostream>
 #include <string>
+#include <cmath> // ? Se puede?
+
+const float EPSILON = 1e-5; // ? Buen epsilon?
 
 /**
  * @class Vector2D
@@ -93,5 +97,33 @@ public:
      */
     std::string toString() const;
 };
+
+//Sobrecarga de operadores
+
+// ? Funciones amiga??
+
+/**
+ * @brief Sobrecarga del operador << para mostrar un objeto de la clase Vector2D
+ * @param flujo Flujo de salida
+ * @param v Objeto Vector2D que se desea mostrar
+ * @return Referencia al flujo de salida
+ */
+std::ostream& operator<<(std::ostream &flujo, const Vector2D &v);
+
+/**
+ * @brief Sobrecarga del operador >> para mostrar un objeto de la clase Vector2D
+ * @param flujo Flujo de entrada
+ * @param v Objeto Vector2D que se desea leer
+ * @return Referencia al flujo de entrada
+ */
+std::istream& operator>>(std::istream &flujo, Vector2D &v);
+
+/**
+ * @brief Comparar si dos objetos de Vector2D son iguales
+ * @param v1 Primer objeto de Vector2D
+ * @param v2 Segundo objeto de Vector2D
+ * @return true si son iguales, false en caso contrario
+ */
+bool operator==(const Vector2D &v1, const Vector2D &v2);
 
 #endif //VECTOR2D_H

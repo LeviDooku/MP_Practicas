@@ -62,3 +62,28 @@ float Vector2D::distancia(const Vector2D &v2) const{
 std::string Vector2D::toString() const{
     return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 }
+
+//Sobrecarga de operadores
+
+std::ostream& operator<<(std::ostream &flujo, const Vector2D &v){
+    flujo << v.toString(); // ? Está bien usar toString()?
+    return flujo;
+}
+
+std::istream& operator>>(std::istream &flujo, Vector2D &v){
+    char p1, coma, p2;
+    float x, y;
+
+    flujo >> p1 >> x >> coma >> y >> p2;
+
+    if(p1 == '(' && coma == ',' && p2 == ')') // ? Comprobar coordenadas?
+        v.setXY(x, y);
+    
+    return flujo;
+}
+
+bool operator==(const Vector2D &v1, const Vector2D &v2){
+    return std::fabs(v1.getX() - v2.getX()) < EPSILON &&
+            std::fabs(v1.getY() - v2.getY()) < EPSILON;
+}
+

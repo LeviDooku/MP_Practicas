@@ -8,7 +8,10 @@ GRUPO DE PRÁCTICAS: viernes
 #define PARTICULA_H
 
 #include <cstdlib>
+#include <cmath> // ? Se puede?
 #include "Vector2D.h"
+
+const float EPSILON = 1e-5; // ? Buen epsilon?
 
 /**
  * @class Particula
@@ -122,5 +125,33 @@ public:
      */
     std::string toString() const;
 };
+
+//Sobrecarga de operadores
+
+// ? Funciones amiga
+
+/**
+ * @brief Sobrecarga del operador << para mostrar un objeto de la clase Particula
+ * @param flujo Flujo de salida
+ * @param p Objeto Particula que se desea mostrar
+ * @return Referencia al flujo de salida
+ */
+std::ostream& operator<<(std::ostream &flujo, const Particula &p);
+
+/**
+ * @brief Sobrecarga del operador >> para mostrar un objeto de la clase Particula
+ * @param flujo Flujo de entrada
+ * @param v Objeto Particula que se desea leer
+ * @return Referencia al flujo de entrada
+ */
+std::istream& operator>>(std::istream &flujo, Particula &p);
+
+/**
+ * @brief Comparar si dos objetos de Particula son iguales
+ * @param p1 Primer objeto de Particula
+ * @param p2 Segundo objeto de Particula
+ * @return true si son iguales, false en caso contrario
+ */
+bool operator==(Particula &p1, Particula &p2);
 
 #endif //PARTICULA_H
