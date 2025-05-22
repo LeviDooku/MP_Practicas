@@ -4,9 +4,7 @@ DNI: 45342754w
 GRUPO DE PRÁCTICAS: viernes
 */
 
-#include <iostream>
-#include <cassert>
-#include "ConjuntoParticula.h"
+#include "ConjuntoParticulas.h"
 
 ConjuntoParticulas::ConjuntoParticulas(const int n){ // ? BIEN ? Sobretodo con el const
     if(n > 0){
@@ -122,7 +120,7 @@ std::string ConjuntoParticulas::toString() const {
 
 //Sobrecarga de operadores
 
-ConjuntoParticulas& operator=(const ConjuntoParticulas &otro){
+ConjuntoParticulas& ConjuntoParticulas::operator=(const ConjuntoParticulas &otro){
     if(this != &otro){
         delete [] set;
 
@@ -137,20 +135,25 @@ ConjuntoParticulas& operator=(const ConjuntoParticulas &otro){
     return *this;
 }
 
-ConjuntoParticulas& operator+=(const Particula &p){
+ConjuntoParticulas& ConjuntoParticulas::operator+=(const Particula &p){
     agregar(p);
     return *this;
 }
 
-ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp){
-    for(int i = 0; i < otro.getUtiles(); ++i)
-        agregar(otro.obtener(i));
+ConjuntoParticulas& ConjuntoParticulas::operator+=(const ConjuntoParticulas &cp){
+    for(int i = 0; i < cp.getUtiles(); ++i)
+        agregar(cp.obtener(i));
     
     return *this;
 }
 
+// TODO ESTOOOOOOOOOOOOOOOOOO
+bool ConjuntoParticulas::operator==(const ConjuntoParticulas &cp){
+    return true;
+}
+
 std::ostream& operator<<(std::ostream &flujo, const ConjuntoParticulas &cp){
-    flujo << "@Particula: " << cp.getUtiles << '\n';
+    flujo << "@Particula: " << cp.getUtiles() << '\n';
 
     for(int i = 0; i < cp.getUtiles(); ++i)
         flujo << "p" << (i + 1) << ": " <<  cp.obtener(i) << "\n";
@@ -158,7 +161,7 @@ std::ostream& operator<<(std::ostream &flujo, const ConjuntoParticulas &cp){
     return flujo;
 }
 
-std::ostream& operator>>(std::ostream &flujo, ConjuntoParticulas &cp){
+std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp){
     std::string cabecera;
     int numParticulas;
 

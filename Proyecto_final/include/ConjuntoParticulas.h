@@ -8,6 +8,7 @@ GRUPO DE PRÁCTICAS: viernes
 #define CONJUNTOPARTICULAS_H
 
 #include <iostream>
+#include <cassert>
 #include "Particula.h"
 
 const int TAM_BLOQUE = 3;
@@ -101,30 +102,43 @@ public:
      * @return Cadena con los datos formateados
      */
     std::string toString() const;
+    
+//Sobrecarga de operadores // ? Está correcto??
+
+    /**
+     * @brief Sobrecarga del operador de asignación
+     * @param otro Objeto que se quiere copiar
+     * @return Referencia al objeto actual
+     */
+    ConjuntoParticulas& operator=(const ConjuntoParticulas &otro);
+
+    /**
+     * @brief Sobrecarga del operador de suma y asignación
+     * @param p Particula que se quiere agregar al conjunto
+     * @return Referencia al objeto actual
+     */
+    ConjuntoParticulas& operator+=(const Particula &p);
+
+    /**
+     * @brief Sobrecarga del operador de suma y asignación
+     * @param cp ConjuntoParticula que se quiere agregar al conjunto actual
+     * @return Referencia al objeto actual
+     */
+    ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp);
+
+    /**
+     * @brief Compara si dos conjuntos contienen las mismas partículas (sin importar el orden)
+     * @param cp Conjunto a comparar
+     * @return True si ambos conjuntos son iguales, false en otro caso
+     */
+    bool operator==(const ConjuntoParticulas &cp);
 };
 
 //Sobrecarga de operadores
 
-/**
- * @brief Sobrecarga del operador de asignación
- * @param otro Objeto que se quiere copiar
- * @return Referencia al objeto actual
- */
-ConjuntoParticulas& operator=(const ConjuntoParticulas &otro);
-
-/**
- * @brief Sobrecarga del operador de suma y asignación
- * @param p Particula que se quiere agregar al conjunto
- * @return Referencia al objeto actual
- */
-ConjuntoParticulas& operator+=(const Particula &p);
-
-/**
- * @brief Sobrecarga del operador de suma y asignación
- * @param cp ConjuntoParticula que se quiere agregar al conjunto actual
- * @return Referencia al objeto actual
- */
-ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp);
+// Se implementan como funciones externas porque los métodos públicos de la clase
+// son suficientes para mostrar la información de un Conjunto con el formato que 
+// se pide.
 
 /**
  * @brief Sobrecarga del operador << para mostrar un objeto de la clase Particula
