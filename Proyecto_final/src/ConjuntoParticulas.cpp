@@ -107,7 +107,6 @@ void ConjuntoParticulas::gestionarColisiones(){
     }
 }
 
-//CORREGIRRR O MODIFICAR!!
 std::string ConjuntoParticulas::toString() const {
     std::string result = "";
 
@@ -119,4 +118,33 @@ std::string ConjuntoParticulas::toString() const {
     }
 
     return result;
+}
+
+//Sobrecarga de operadores
+
+ConjuntoParticulas& operator=(const ConjuntoParticulas &otro){
+    if(this != &otro){
+        delete [] set;
+
+        capacidad = otro.getCapacidad();
+        utiles = otro.getUtiles();
+        set = new Particula[capacidad];
+
+        for(int i = 0; i < utiles; ++i)
+            set[i] = otro.set[i];
+    }
+
+    return *this;
+}
+
+ConjuntoParticulas& operator+=(const Particula &p){
+    agregar(p);
+    return *this;
+}
+
+ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp){
+    for(int i = 0; i < otro.getUtiles(); ++i)
+        agregar(otro.obtener(i));
+    
+    return *this;
 }

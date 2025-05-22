@@ -102,4 +102,17 @@ public:
     std::string toString() const;
 };
 
+//Sobrecarga de operadores
+
+/**
+ * @brief Sobrecarga del operador de asignación
+ * @param otro Objeto que se quiere copiar
+ * @return Referencia al objeto actual
+ */
+ConjuntoParticulas& operator=(const ConjuntoParticulas &otro);
+
+ConjuntoParticulas& operator+=(const Particula &p);
+
+ConjuntoParticulas& operator+=(const ConjuntoParticulas &cp);
+
 #endif //CONJUNTOPARTICULAS_H
