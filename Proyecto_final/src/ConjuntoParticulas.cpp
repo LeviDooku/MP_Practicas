@@ -64,7 +64,7 @@ void ConjuntoParticulas::borrar(int pos){
     }
 }
 
-Particula& ConjuntoParticulas::obtener(int pos) const{
+const Particula& ConjuntoParticulas::obtener(int pos) const{
     assert(pos >= 0 && pos < utiles && "Índice fuera de rango en obtener()");
     return set[pos];
 }
@@ -105,7 +105,7 @@ void ConjuntoParticulas::gestionarColisiones(){
     }
 }
 
-std::string ConjuntoParticulas::toString() const {
+std::string ConjuntoParticulas::toString() const{
     std::string result = "";
 
     result += "Capacidad: " + std::to_string(capacidad) + "\n";
@@ -114,7 +114,7 @@ std::string ConjuntoParticulas::toString() const {
     for (int i = 0; i < utiles; ++i) {
         result += set[i].toString() + "\n";
     }
-
+    
     return result;
 }
 
@@ -163,7 +163,7 @@ std::ostream& operator<<(std::ostream &flujo, const ConjuntoParticulas &cp){
 
 std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp){
     std::string cabecera;
-    int numParticulas;
+    int numParticulas; 
 
     flujo >> cabecera >> numParticulas;
 

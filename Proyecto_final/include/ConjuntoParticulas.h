@@ -23,6 +23,12 @@ private:
     int capacidad = 0; ///< Capacidad del array
     int utiles  = 0; ///< Posiciones ocupadas
 
+    /**
+     * @brief Redimensiona el array dinámico de Partícula
+     * @param new_cap Nueva capacidad del array
+     */
+    void redimensiona(const int new_cap);
+
 public:
     
     /**
@@ -53,12 +59,6 @@ public:
      * @return Capacidad de partículas del conjunto
      */    
     int getCapacidad() const;
-
-    /**
-     * @brief Redimensiona el array dinámico de Partícula
-     * @param new_cap Nueva capacidad del array
-     */
-    void redimensiona(const int new_cap);
     
     /**
      * @brief Agrega una partícula al conjunto. Si no hay hueco, redimensiona la capacidad
@@ -77,7 +77,7 @@ public:
      * @param pos Posición del elemento
      * @return Referencia al elemento pos
      */
-    Particula& obtener(int pos) const; 
+    const Particula& obtener(int pos) const; 
 
     /**
      * @brief Reemplaza un elemento concreto de un array con otro
