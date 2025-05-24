@@ -68,7 +68,21 @@ int main() {
      /********************************************
      *     PROCESAMIENTO DE LOS DATOS
      ********************************************/
-     //......................................
+
+    for(int i = 0; i < parts.getUtiles(); ++i){
+        Particula p = parts.obtener(i);
+        int indice_centro_cercano = 0;
+        float distancia_min = p.distancia(centros[0]);
+
+        for(int j = 1; j < k; ++j){
+            float dist_actual = p.distancia(centros[j]);
+            if(distancia_min > dist_actual){
+                distancia_min = dist_actual;
+                indice_centro_cercano = j;
+            }
+        }
+        grupos[indice_centro_cercano].agregar(p);
+    }
 
     /********************************
      *     MOSTRAR RESULTADOS
@@ -79,6 +93,10 @@ int main() {
         cout << "Grupo " << i+1 << endl;
         cout << grupos[i] << endl;   
     }
+
+    delete [] centros;
+    delete [] grupos;
+
     return 0;
 }
 

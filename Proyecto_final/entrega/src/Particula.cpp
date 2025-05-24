@@ -151,6 +151,10 @@ void Particula::wrap(){
     if(lim_arriba(radio)) pos.setY(radio + epsilon);
 }
 
+float Particula::distancia(const Particula &p) const{
+    return getPos().distancia(p.getPos());
+}
+
 std::string Particula::toString() const{
     return "{ " + pos.toString() + ", " + veloc.toString() + ", " + acel.toString() + ", " + std::to_string(radio) + ", " + std::to_string(tipo) + " }";
 }

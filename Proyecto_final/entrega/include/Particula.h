@@ -156,9 +156,16 @@ public:
     void choque(Particula &otra);
 
     /**
-     * @brief Cambiar la posición de una partícula de forma que al llegar a uno de los lados, sale por el otro.
+     * @brief Cambiar la posición de una partícula de forma que al llegar a uno de los lados, sale por el otro
      */
     void wrap();
+
+    /**
+     * @brief Calcular la distancia entre la particula actual y otra
+     * @param p Objeto de clase particula con el que se calcula la distancia
+     * @return La distancia entre ambos objetos
+     */
+    float distancia(const Particula &p) const;
 
     /**
      * @brief Devuelve los datos del objeto actual como string

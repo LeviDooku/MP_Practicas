@@ -107,8 +107,6 @@ public:
 
 //Sobrecarga de operadores
 
-// ? Funciones amiga??
-
 /**
  * @brief Sobrecarga del operador << para mostrar un objeto de la clase Vector2D
  * @param flujo Flujo de salida
