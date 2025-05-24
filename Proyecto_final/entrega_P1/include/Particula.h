@@ -159,32 +159,6 @@ public:
      * @return Cadena con los datos formateados
      */
     std::string toString() const;
-
-    /**
-     * @brief Comparar si dos objetos de Particula son iguales
-     * @param p1 Primer objeto de Particula
-     * @param p2 Segundo objeto de Particula
-     * @return true si son iguales, false en caso contrario
-     */
-    bool operator==(const Particula &p2) const;
 };
-
-//Sobrecarga de operadores
-
-/**
- * @brief Sobrecarga del operador << para mostrar un objeto de la clase Particula
- * @param flujo Flujo de salida
- * @param p Objeto Particula que se desea mostrar
- * @return Referencia al flujo de salida
- */
-std::ostream& operator<<(std::ostream &flujo, const Particula &p);
-
-/**
- * @brief Sobrecarga del operador >> para leer un objeto de la clase Particula
- * @param flujo Flujo de entrada
- * @param v Objeto Particula que se desea leer
- * @return Referencia al flujo de entrada
- */
-std::istream& operator>>(std::istream &flujo, Particula &p);
 
 #endif //PARTICULA_H

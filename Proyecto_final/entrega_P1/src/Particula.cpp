@@ -150,35 +150,3 @@ void Particula::wrap(){
 std::string Particula::toString() const{
     return "{ " + pos.toString() + ", " + veloc.toString() + ", " + acel.toString() + ", " + std::to_string(radio) + ", " + std::to_string(tipo) + " }";
 }
-
-//Sobrecarga de operadores
-
-bool Particula::operator==(const Particula &p2) const{
-    return getPos() == p2.getPos() && getAcel() == p2.getAcel() && 
-            getVel() == p2.getVel() && std::fabs(getRadio() - p2.getRadio()) < EPSILON;
-}
-
-std::ostream& operator<<(std::ostream &flujo, const Particula &p){
-    flujo << p.toString(); // ? Está bien usar toString()?
-    return flujo;
-}
-
-std::istream& operator>>(std::istream &flujo, Particula &p){
-    std::string cabecera;
-    char ll_izq, c1, c2, c3, c4, ll_dcha;
-    Vector2D pos, vel, acel;
-    float radio;
-    int tipo;
-
-    flujo >> cabecera >> ll_izq
-            >> pos >> c1
-            >> vel >> c2
-            >> acel >> c3
-            >> radio >> c4
-            >> tipo >> ll_dcha;
-
-    if(ll_izq == '{' && c1 == ',' && c2 == ',' && c3 == ',' && c4 == ',' && ll_dcha == '}') // ? Ta bien?
-        p = Particula(pos, acel, vel, radio, tipo);
-    
-    return flujo;
-}
