@@ -29,13 +29,18 @@ private:
      */
     void redimensiona(const int new_cap);
 
+    /**
+     * @brief Libera la memoria del array dinámico de Partícula
+     */
+    void libera();
+
 public:
     
     /**
      * @brief Constructor por defecto. 
      * @param n Define la cantidad de particulas del conjunto. Se generan de forma aleatoria.
      */
-    ConjuntoParticulas(const int n = 0);
+    ConjuntoParticulas(int n = 0);
     
     /**
      * @brief Constructor de copia
@@ -90,7 +95,7 @@ public:
      * @brief Mueve las Partículas del conjunto en base a un tipo
      * @param tipo Tipo de movimiento de las partículas
      */
-    void mover(const int tipo = 0);
+    void mover(int tipo = 0);
 
     /**
      * @brief Evalúa si las partículas han chocado
@@ -131,7 +136,7 @@ public:
      * @param cp Conjunto a comparar
      * @return True si ambos conjuntos son iguales, false en otro caso
      */
-    bool operator==(const ConjuntoParticulas &cp);
+    bool operator==(const ConjuntoParticulas &cp) const;
 };
 
 //Sobrecarga de operadores

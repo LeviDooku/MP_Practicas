@@ -153,6 +153,11 @@ std::string Particula::toString() const{
 
 //Sobrecarga de operadores
 
+bool Particula::operator==(const Particula &p2) const{
+    return getPos() == p2.getPos() && getAcel() == p2.getAcel() && 
+            getVel() == p2.getVel() && std::fabs(getRadio() - p2.getRadio()) < EPSILON;
+}
+
 std::ostream& operator<<(std::ostream &flujo, const Particula &p){
     flujo << p.toString(); // ? Está bien usar toString()?
     return flujo;
@@ -176,9 +181,4 @@ std::istream& operator>>(std::istream &flujo, Particula &p){
         p = Particula(pos, acel, vel, radio, tipo);
     
     return flujo;
-}
-
-bool operator==(Particula &p1, Particula &p2){
-    return p1.getPos() == p2.getPos() && p1.getAcel() == p2.getAcel() && 
-            p1.getVel() == p2.getVel() && std::fabs(p1.getRadio() - p2.getRadio()) < EPSILON;
 }

@@ -6,7 +6,7 @@ GRUPO DE PRÁCTICAS: viernes
 
 #include "ConjuntoParticulas.h"
 
-ConjuntoParticulas::ConjuntoParticulas(const int n){ // ? BIEN ? Sobretodo con el const
+ConjuntoParticulas::ConjuntoParticulas(int n){
     if(n > 0){
         set = new Particula[n];
         capacidad = n;
@@ -17,7 +17,7 @@ ConjuntoParticulas::ConjuntoParticulas(const int n){ // ? BIEN ? Sobretodo con e
     }
 }
 
-ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &otro){ // ? No deberían tmb copiarse la cap??
+ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &otro){
     capacidad = otro.capacidad;
     utiles = otro.utiles;
     set = new Particula[capacidad];
@@ -27,8 +27,7 @@ ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &otro){ // ? No 
 }
 
 ConjuntoParticulas::~ConjuntoParticulas(){
-    delete [] set;
-    set = nullptr;
+    libera();
 }
 
 int ConjuntoParticulas::getUtiles() const{
@@ -48,6 +47,13 @@ void ConjuntoParticulas::redimensiona(const int new_cap){
     delete [] set;
     set = set_amplido;
     capacidad = new_cap;
+}
+
+void ConjuntoParticulas::libera(){
+    delete [] set;
+    set = nullptr;
+    capacidad = 0;
+    utiles = 0;
 }
 
 void ConjuntoParticulas::agregar(const Particula &a_agregar){
@@ -75,32 +81,29 @@ void ConjuntoParticulas::reemplazar(const Particula &sustituta, int pos){
 }
 
 void ConjuntoParticulas::mover(int tipo){
-    switch(tipo){
-        default:
-        case 0:
-            for(int i = 0; i < utiles; ++i)
-                set[i].mover();
-            break;
-        case 1:
-            for(int i = 0; i < utiles; ++i){
-                set[i].mover();
-                set[i].rebotar();
-            }
-            break;
-        case 2:
-            for(int i = 0; i < utiles; ++i){
-                set[i].mover();
-                set[i].wrap();
-            }
-            break;
+    for(int i = 0; i < utiles; ++i){
+        if(tipo == 0 || tipo != 1 || tipo != 2)
+            set[i].mover();
+        else if(tipo == 1){
+            set[i].mover();
+            set[i].rebotar();
+        }
+        else if(tipo == 2){
+            set[i].mover();
+            set[i].wrap();
+        }
+
     }
 }
 
 void ConjuntoParticulas::gestionarColisiones(){
     for(int i = 0; i < utiles; ++i){
-        for(int j = i + 1; j < utiles; ++j){
-            if(set[i].colision(set[j]))
+        bool colisionan = false;
+        for(int j = i + 1; j < utiles && !colisionan; ++j){
+            if(set[i].colision(set[j])){
                 set[i].choque(set[j]);
+                colisionan = true;
+            }
         }
     }
 }
@@ -147,9 +150,29 @@ ConjuntoParticulas& ConjuntoParticulas::operator+=(const ConjuntoParticulas &cp)
     return *this;
 }
 
-// TODO ESTOOOOOOOOOOOOOOOOOO
-bool ConjuntoParticulas::operator==(const ConjuntoParticulas &cp){
-    return true;
+bool ConjuntoParticulas::operator==(const ConjuntoParticulas &cp) const{
+    bool iguales = utiles == cp.getUtiles();
+
+    if(iguales){
+        bool *p_usadas = new bool[utiles];
+        for(int i = 0; i < utiles; ++i)
+            p_usadas[i] = false; 
+        
+        for(int i = 0; i < utiles; ++i){
+            bool encontrado = false;
+            for(int j = 0; j < utiles && !encontrado; ++j){
+                if(!p_usadas[j] && obtener(i) == cp.obtener(j)){
+                    p_usadas[j] = true;
+                    encontrado = true;
+                }
+            }
+            if(!encontrado){
+                iguales = false;
+            }
+        }
+        delete [] p_usadas;
+    }
+    return iguales;
 }
 
 std::ostream& operator<<(std::ostream &flujo, const ConjuntoParticulas &cp){
