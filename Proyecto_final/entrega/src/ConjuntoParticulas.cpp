@@ -193,7 +193,7 @@ std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp){
     while(cp.getUtiles() > 0)
         cp.borrar(0);
 
-    for(int i = 0; i < cp.getCapacidad(); ++i){
+    for(int i = 0; i < numParticulas; ++i){
         std::string etiqueta;
         flujo >> etiqueta;
         
@@ -205,3 +205,4 @@ std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp){
 
     return flujo;
 }
+

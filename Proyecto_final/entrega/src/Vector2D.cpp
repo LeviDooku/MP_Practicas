@@ -76,14 +76,14 @@ std::istream& operator>>(std::istream &flujo, Vector2D &v){
 
     flujo >> p1 >> x >> coma >> y >> p2;
 
-    if(p1 == '(' && coma == ',' && p2 == ')') // ? Comprobar coordenadas?
+    if(p1 == '(' && coma == ',' && p2 == ')')
         v.setXY(x, y);
     
     return flujo;
 }
 
-bool operator==(const Vector2D &v1, const Vector2D &v2){
-    return std::fabs(v1.getX() - v2.getX()) < EPSILON &&
-            std::fabs(v1.getY() - v2.getY()) < EPSILON;
+bool Vector2D::operator==(const Vector2D &v1) const{
+    return std::fabs(getX() - v1.getX()) < EPSILON &&
+            std::fabs(getY() - v1.getY()) < EPSILON;
 }
 

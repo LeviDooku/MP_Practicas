@@ -1,7 +1,7 @@
-/* 
- * File:   clasifica.cpp
- * Author: David Pelta
- *
+/*
+NOMBRE Y APELLIDOS: Pedro Velasco Santana
+DNI: 45342754w
+GRUPO DE PRÁCTICAS: viernes
 */
 
 #include <iostream>
@@ -12,18 +12,32 @@
 using namespace std;
 
 int main() {
-    
-
     ConjuntoParticulas parts;
     Particula* centros;
     ConjuntoParticulas* grupos;
+    int k = 0; //Número de Partículas en centros
     
     
     /********************************
      *        LECTURA DE DATOS
      *******************************/
+    cin >> parts;
 
-    // ..........................
+    string cabecera;
+    cin >> cabecera;
+
+    if (cabecera != "@Centros:") {
+        cerr << "Error: Se esperaba '@Centros:', se encontró: '" << cabecera << "'" << endl;
+        return 1;
+    }
+
+    cin >> k;
+
+    centros = new Particula[k];
+    for (int i = 0; i < k; ++i) {
+        string etiqueta;
+        cin >> etiqueta >> centros[i];
+    }
 
     /********************************
      *        MOSTRAR DATOS LEIDOS
@@ -36,31 +50,25 @@ int main() {
     for(int i = 0; i < k; i++)
         cout << centros[i] << endl;
     
-    
-
-    
-    
      /********************************************
      *     SE AGREGAN LOS CENTROS A CADA GRUPO
      ********************************************/
 
+    grupos = new ConjuntoParticulas[k];
     for(int i = 0; i < k; i++)
         grupos[i] += centros[i];
     
     
-    cout << "ESTADO INICIAL DE LOS GRUPOS" << endl;
+    cout << endl << "ESTADO INICIAL DE LOS GRUPOS" << endl;
     for(int i = 0; i < k; i++){
         cout << "Grupo " << i+1 << endl;
         cout << grupos[i] << endl;   
     }
     
-    
      /********************************************
      *     PROCESAMIENTO DE LOS DATOS
      ********************************************/
      //......................................
-
-
 
     /********************************
      *     MOSTRAR RESULTADOS
@@ -71,8 +79,6 @@ int main() {
         cout << "Grupo " << i+1 << endl;
         cout << grupos[i] << endl;   
     }
-    
-
     return 0;
 }
 
