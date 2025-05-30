@@ -17,10 +17,10 @@ int main() {
     ConjuntoParticulas* grupos;
     int k = 0; //Número de Partículas en centros
     
-    
     /********************************
      *        LECTURA DE DATOS
      *******************************/
+
     cin >> parts;
 
     string cabecera;
@@ -34,7 +34,7 @@ int main() {
     cin >> k;
 
     centros = new Particula[k];
-    for (int i = 0; i < k; ++i) {
+    for(int i = 0; i < k; ++i){
         string etiqueta;
         cin >> etiqueta >> centros[i];
     }
