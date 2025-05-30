@@ -66,7 +66,7 @@ std::string Vector2D::toString() const{
 //Sobrecarga de operadores
 
 std::ostream& operator<<(std::ostream &flujo, const Vector2D &v){
-    flujo << v.toString(); // ? Está bien usar toString()?
+    flujo << v.toString();
     return flujo;
 }
 
