@@ -100,6 +100,10 @@ float Particula::getRadio() const{
     return radio;
 }
 
+int Particula::getTipo() const{
+    return tipo;
+}
+
 //Otros métodos
 
 void Particula::mover(){

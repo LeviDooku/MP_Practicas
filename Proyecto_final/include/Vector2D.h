@@ -9,9 +9,8 @@ GRUPO DE PRÁCTICAS: viernes
 
 #include <iostream>
 #include <string>
-#include <cmath> // ? Se puede?
-
-const float EPSILON = 1e-5; // ? Buen epsilon?
+#include <cmath>
+#include "params.h"
 
 /**
  * @class Vector2D
@@ -99,8 +98,6 @@ public:
 };
 
 //Sobrecarga de operadores
-
-// ? Funciones amiga??
 
 /**
  * @brief Sobrecarga del operador << para mostrar un objeto de la clase Vector2D

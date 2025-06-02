@@ -9,6 +9,7 @@ GRUPO DE PRÁCTICAS: viernes
 
 #include "ConjuntoParticulas.h"
 #include "Particula.h"
+#include "params.h"
 
 /**
  * @class Minijuego
@@ -16,36 +17,38 @@ GRUPO DE PRÁCTICAS: viernes
  */
 class Minijuego{
 private: 
-    ConjuntoParticulas naves; ///< Naves que recibirán los disparos
-    ConjuntoParticulas disparos; ///< Disparos que saldrán desde la base
-    Particula base; ///< Base que se moverá en horizontal y disparará
-    int estado_juego; ///< 0: jugando, 1: victoria, -1: derrota
+    ConjuntoParticulas naves;       ///< Naves que recibirán los disparos
+    ConjuntoParticulas disparos;    ///< Disparos que saldrán desde la base
+    Particula base;                 ///< Base que se moverá en horizontal y disparará
+    int estado_juego;               ///< 0: jugando, 1: victoria, -1: derrota
+    int num_vidas;                  ///< Número de vidas del jugador
 
     /**
      * @brief Mueve las naves según su patrón de movimiento
      */
-    void moverNaves();
+    //void moverNaves();
 
     /**
      * @brief Mueve los disparos hacia arriba de la pantalla
      */
-    void moverDisparos();
+    //void moverDisparos();
 
     /**
      * @brief Gestiona las colisiones entre elementos del juego
      * @return True si se produjo colisión, false en caso contrario
      */
-    bool gestionaColisiones();
+    //bool gestionaColisiones();
 
     /**
      * @brief Crea un nuevo disparo en la base de la nave
      */
-    void crearDisparo();
+    //void crearDisparo();
 public:
+    
     /**
      * @brief Constructor
      */
-    Minijuego();
+    Minijuego(int numNaves = MAX_NAVES, float radioBase = 10.0f, float radioNave = 8.0, int vidas = MAX_VIDAS);
 
     /**
      * @brief Avanza el estado del juego un paso
@@ -88,18 +91,18 @@ public:
      * @brief Devuelve el número de naves restantes
      * @return El número de naves restantes
      */
-    int getNumNaves() const;
+    //int getNumNaves() const;
 
     /**
      * @brief Devuelve la cantidad de disparos restantes
      * @return El número de disparos restantes
      */
-    int getNumDisparos() const;
+    //int getNumDisparos() const;
 
     /**
      * @brief Reinicia el juego a su estado inicial
      */
-    void reiniciar();
+    //void reiniciar();
 };
 
 #endif //MINIJUEGO_H

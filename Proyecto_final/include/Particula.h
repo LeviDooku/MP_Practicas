@@ -127,6 +127,12 @@ public:
     float getRadio() const;
 
     /**
+     * @brief Devuelve el tipo del objeto actual
+     * @return El tipo del objeto actual
+     */
+    int getTipo() const;
+
+    /**
      * @brief Actualiza la posición de la partícula en base a unas operaciones
      */
     void mover();

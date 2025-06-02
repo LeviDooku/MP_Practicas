@@ -5,7 +5,6 @@
 ############################
 
 # Variables (directorios y compilador)
-
 HOME = .
 BIN = $(HOME)/bin
 INCLUDE = $(HOME)/include
@@ -16,23 +15,22 @@ DOC = $(HOME)/doc
 
 CXX = g++
 CXXFLAGS = -c -I$(INCLUDE) -Wall -Wextra -std=c++11
+LDFLAGS = -L. -lraylib -lGL -lm -lpthread -ldl -lrt # Flags para Linux
 
 # Detectar archivos fuente y generar binarios
-
 CPP_SOURCE = $(wildcard $(SRC)/*.cpp)
 OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(CPP_SOURCE))
 TARGET = $(BIN)/main
 
 .PHONY: all clean mrproper genera_dir doc clean-doc
 
-#Directivas de compilación
-
+# Directivas de compilación
 all: genera_dir $(TARGET)
 	@echo "[+] Compilación finalizada correctamente"
 
 $(TARGET): $(OBJ_FILES) $(OBJ)/main.o
 	@echo "[+] Generando ejecutable $(TARGET)"
-	@$(CXX) -o $@ $(OBJ)/main.o $(OBJ_FILES)
+	@$(CXX) -o $@ $(OBJ)/main.o $(OBJ_FILES) $(LDFLAGS)
 
 $(OBJ)/main.o: main.cpp
 	@echo "[+] Compilando main.cpp"
@@ -42,8 +40,7 @@ $(OBJ)/%.o: $(SRC)/%.cpp $(INCLUDE)/%.h
 	@echo "[+] Compilando $<"
 	@$(CXX) $(CXXFLAGS) -o $@ $<
 
-#Crear directorios si no existen
-
+# Crear directorios si no existen
 genera_dir: $(BIN)/ $(OBJ)/ $(LIB)/ 
 	@echo "[+] Directorios creados: $(BIN), $(OBJ), $(LIB)"
 
@@ -56,19 +53,16 @@ $(OBJ)/:
 $(LIB)/:
 	@mkdir -p $(LIB)
 
-#Limpiar ficheros objeto y ejecutables
-
+# Limpiar ficheros objeto y ejecutables
 clean:
 	@echo "[+] Limpiando ficheros objeto y ejecutables"
 	@rm -rf $(OBJ) $(BIN) $(LIB)
 
-#Eliminar todo
-
+# Eliminar todo
 mrproper: clean clean-doc
 	@echo "[+] Limpiando ficheros objeto, ejecutables y documentación"
 
-#Generar documentación (opcional)
-
+# Generar documentación (opcional)
 doc:
 	@echo "[+] Generando documentación con Doxygen"
 	@doxygen $(DOC)/Doxyfile
