@@ -22,6 +22,8 @@ const float EPSILON = 0.01;
 
 const int MAX_NAVES = 15;
 const int MAX_VIDAS = 5;
+const int MAX_DISPAROS = 100;
+const float RADIO_DISPARO = 5.0; // ! CAMBIAR A GUSTO
 
 inline float aleatorio(float min, float max){
     float r = rand() / static_cast<float> (RAND_MAX);

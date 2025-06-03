@@ -22,33 +22,36 @@ private:
     Particula base;                 ///< Base que se moverá en horizontal y disparará
     int estado_juego;               ///< 0: jugando, 1: victoria, -1: derrota
     int num_vidas;                  ///< Número de vidas del jugador
+    float tiempoUltimoDisparo;      // ! DEBUG
+    int disparosGeneradosDebug;     // ! DEBUG
+    bool modoGeneracionDisparosActivo; // ! DEBUG
 
     /**
      * @brief Mueve las naves según su patrón de movimiento
      */
-    //void moverNaves();
+    void moverNaves();
 
     /**
-     * @brief Mueve los disparos hacia arriba de la pantalla
+     * @brief Mueve los disparos hacia arriba de la pantalla y los elimina del conjunto
      */
-    //void moverDisparos();
+    void moverDisparos();
+
+    /**
+     * @brief Crea un nuevo disparo en la base de la nave y lo agrega al conjunto disparos
+     */
+    void crearDisparo();
 
     /**
      * @brief Gestiona las colisiones entre elementos del juego
      * @return True si se produjo colisión, false en caso contrario
      */
-    //bool gestionaColisiones();
-
-    /**
-     * @brief Crea un nuevo disparo en la base de la nave
-     */
-    //void crearDisparo();
+    bool gestionaColisiones();
 public:
     
     /**
      * @brief Constructor
      */
-    Minijuego(int numNaves = MAX_NAVES, float radioBase = 10.0f, float radioNave = 8.0, int vidas = MAX_VIDAS);
+    Minijuego(int numNaves = MAX_NAVES, float radioBase = 10.0, float radioNave = 15.0, int vidas = MAX_VIDAS);
 
     /**
      * @brief Avanza el estado del juego un paso
@@ -56,6 +59,13 @@ public:
      * @return Código del estado del juego
      */
     int step(int tecla);
+
+    ////////////////////////////////////////////////////
+    /**
+     * @brief MÉTODO PARA DEBUG
+     */
+    int step_debug(float dt);
+    ////////////////////////////////////////////////////
 
     /**
      * @brief Comprueba si el juego ha termiado
@@ -91,18 +101,18 @@ public:
      * @brief Devuelve el número de naves restantes
      * @return El número de naves restantes
      */
-    //int getNumNaves() const;
+    int getNumNaves() const;
 
     /**
      * @brief Devuelve la cantidad de disparos restantes
      * @return El número de disparos restantes
      */
-    //int getNumDisparos() const;
+    int getNumDisparos() const;
 
     /**
      * @brief Reinicia el juego a su estado inicial
      */
-    //void reiniciar();
+    //void reiniciar(); 
 };
 
 #endif //MINIJUEGO_H

@@ -128,7 +128,10 @@ void Particula::rebotar(){
 }
 
 bool Particula::colision(const Particula &otra) const{
-    return pos.distancia(otra.getPos()) <= radio + otra.getRadio();
+    const float MARGEN_COLISION = 0.5; //Aumentar HitBox, para evitar tunneling
+    float radios_sum = radio + otra.getRadio() + MARGEN_COLISION;
+    return pos.distancia(otra.getPos()) <= radios_sum;
+    //return pos.distancia(otra.getPos()) <= radio + otra.getRadio();
 }
 
 void Particula::choque(Particula &otra){

@@ -82,7 +82,7 @@ void ConjuntoParticulas::reemplazar(const Particula &sustituta, int pos){
 
 void ConjuntoParticulas::mover(int tipo){
     for(int i = 0; i < utiles; ++i){
-        if(tipo == 0 || tipo != 1 || tipo != 2)
+        if(tipo == 0)
             set[i].mover();
         else if(tipo == 1){
             set[i].mover();

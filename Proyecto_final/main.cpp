@@ -35,7 +35,7 @@ int main(void) {
     SetTargetFPS(60);
 
     // Crear instancia del juego
-    Minijuego juego(100, 10.0, 5.0, 30); //PARA PROBAR CONSTRUCTOR
+    Minijuego juego(100, 10.0, 8.0, 30); //PARA PROBAR CONSTRUCTOR
 
     // Bucle principal
     while (!WindowShouldClose()) {
@@ -46,11 +46,14 @@ int main(void) {
         else if (IsKeyDown(KEY_SPACE)) tecla = KEY_SPACE;
 
         // Actualizar estado del juego
-        juego.step(tecla);
+        //juego.step(tecla);
+        juego.step_debug(GetFrameTime());
 
         // Renderizado
         BeginDrawing();
         ClearBackground(BLACK);
+        printf("Limpiando fondo\n");
+        DrawText(TextFormat("Disparos: %d", juego.getNumDisparos()), 10, 30, 20, WHITE);
         
         // Pintar todos los elementos del juego
         const ConjuntoParticulas& naves = juego.getNaves();
