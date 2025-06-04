@@ -15,45 +15,39 @@ GRUPO DE PRÁCTICAS: viernes
 #include <ctime>   //Para time
 
 //Función para pintar una partícula
-void PintarParticula(const Particula& p) { 
+void PintarParticula(const Particula& p){ 
     Color color; 
-    
-    // Utilizaremos las coordenadas X e Y y el radio de la Particula
-    // para dibujar la forma y el tamaño apropiados.
     float posX = p.getPos().getX();
     float posY = p.getPos().getY();
     float radio = p.getRadio();
 
-    switch(p.getTipo()) { 
-        case 1: // Naves (enemigos)
-            color = MAROON; // Rojo oscuro (según tu última elección)
-            // Dibujar un triángulo apuntando hacia abajo
+    switch(p.getTipo()){ 
+        case 1: //Naves (enemigos)
+            color = MAROON;
             DrawTriangle(
-                (Vector2){posX, posY - radio},                  // Vértice superior (punta)
-                (Vector2){posX - radio, posY + radio},          // Vértice inferior izquierdo
-                (Vector2){posX + radio, posY + radio},          // Vértice inferior derecho
+                (Vector2){posX, posY - radio},                  //Vértice superior (punta)
+                (Vector2){posX - radio, posY + radio},          //Vértice inferior izquierdo
+                (Vector2){posX + radio, posY + radio},          //Vértice inferior derecho
                 color
             );
             break;
-        case 2: // Base (jugador)
-            color = DARKGREEN; // Verde oscuro (según tu elección)
-            // Dibujar un rectángulo para la base (centrado en la posición de la partícula)
+        case 2: //Base (jugador)
+            color = DARKGREEN;
             DrawRectangle(
-                posX - radio,   // Esquina superior izquierda X
-                posY - radio,   // Esquina superior izquierda Y
-                radio * 2,      // Ancho (2 veces el radio para simular un cuadrado si el radio es el lado)
-                radio * 2,      // Alto (2 veces el radio)
+                posX - radio,   //Esquina superior izquierda X
+                posY - radio,   //Esquina superior izquierda Y
+                radio * 2,      //Ancho (2 veces el radio para simular un cuadrado si el radio es el lado)
+                radio * 2,      //Alto (2 veces el radio)
                 color
             );
             break;            
-        default: 
-            color = GOLD; // Dorado/Amarillo (según tu última elección)
-            // Dibujar un pequeño y delgado rectángulo vertical para el proyectil
+        default: //Proyectiles
+            color = GOLD; 
             DrawRectangle(
-                posX - (radio / 2.0f),    // Esquina superior izquierda X (para centrarlo y hacerlo más delgado)
-                posY - (radio * 1.5f),    // Esquina superior izquierda Y (para que parezca que sale desde un punto)
-                radio,                    // Ancho (el radio de la partícula)
-                radio * 3.0f,             // Alto (hacerlo más alto para un efecto de "rayo")
+                posX - (radio / 2.0f),    //Esquina superior izquierda X (para centrarlo y hacerlo más delgado)
+                posY - (radio * 1.5f),    //Esquina superior izquierda Y (para que parezca que sale desde un punto)
+                radio,                    //Ancho (el radio de la partícula)
+                radio * 3.0f,             //Alto (hacerlo más alto para un efecto de "rayo")
                 color
             );
             break;
