@@ -121,6 +121,10 @@ std::string ConjuntoParticulas::toString() const{
     return result;
 }
 
+void ConjuntoParticulas::vaciar(){
+    utiles = 0;
+}
+
 //Sobrecarga de operadores
 
 ConjuntoParticulas& ConjuntoParticulas::operator=(const ConjuntoParticulas &otro){

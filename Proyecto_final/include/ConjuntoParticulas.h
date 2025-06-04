@@ -107,8 +107,13 @@ public:
      * @return Cadena con los datos formateados
      */
     std::string toString() const;
+
+    /**
+     * @brief Método que setea los utiles a 0
+     */
+    void vaciar();
     
-//Sobrecarga de operadores // ? Está correcto??
+//Sobrecarga de operadores
 
     /**
      * @brief Sobrecarga del operador de asignación

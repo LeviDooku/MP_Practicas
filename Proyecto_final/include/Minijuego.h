@@ -21,11 +21,13 @@ private:
     ConjuntoParticulas disparos;    ///< Disparos que saldrán desde la base
     Particula base;                 ///< Base que se moverá en horizontal y disparará
     int estado_juego;               ///< 0: jugando, 1: victoria, -1: derrota
-    int num_vidas;                  ///< Número de vidas del jugador
-    float tiempoUltimoDisparo;      // ! DEBUG
-    int disparosGeneradosDebug;     // ! DEBUG
-    bool modoGeneracionDisparosActivo; // ! DEBUG
-
+    int num_naves;                  ///< Número inicial de naves
+    float radio_base;               ///< Radio de la base
+    float radio_nave;               ///< Radio de las naves    
+    int municion;                   ///< Munición disponible
+    float tiempo_ultimo_disparo;    ///< Tiempo desde que se realizó el último disparo
+          
+    
     /**
      * @brief Mueve las naves según su patrón de movimiento
      */
@@ -46,26 +48,31 @@ private:
      * @return True si se produjo colisión, false en caso contrario
      */
     bool gestionaColisiones();
+
+    /**
+     * @brief Método para crear las partículas del conjunto Naves
+     */
+    void inicializarNaves();
+
+    /**
+     * @brief Actualizar los atributos de la base, en función de la tecla pulsada
+     * @param tecla Código de la tecla que define el movimiento de la base
+     */
+    void moverBase(int tecla);
+
 public:
     
     /**
      * @brief Constructor
      */
-    Minijuego(int numNaves = MAX_NAVES, float radioBase = 10.0, float radioNave = 15.0, int vidas = MAX_VIDAS);
+    Minijuego(int numNaves = MAX_NAVES, float radioBase = MAX_R_BASE, float radioNave = MAX_R_NAVE);
 
     /**
      * @brief Avanza el estado del juego un paso
      * @param tecla Código de la tecla pulsada
      * @return Código del estado del juego
      */
-    int step(int tecla);
-
-    ////////////////////////////////////////////////////
-    /**
-     * @brief MÉTODO PARA DEBUG
-     */
-    int step_debug(float dt);
-    ////////////////////////////////////////////////////
+    int step(int tecla, float dt);
 
     /**
      * @brief Comprueba si el juego ha termiado
@@ -110,9 +117,21 @@ public:
     int getNumDisparos() const;
 
     /**
+     * @brief Devuelve el radio de la nave
+     * @return Radio de la nave
+     */
+    float getRadioNave() const;
+
+    /**
+     * @brief Devuelve el radio de la base
+     * @return Radio de la base
+     */
+    float getRadioBase() const;
+
+    /**
      * @brief Reinicia el juego a su estado inicial
      */
-    //void reiniciar(); 
+    void reiniciar(int num_naves); 
 };
 
 #endif //MINIJUEGO_H

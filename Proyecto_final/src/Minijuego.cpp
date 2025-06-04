@@ -5,12 +5,14 @@ GRUPO DE PRÁCTICAS: viernes
 */
 
 #include "Minijuego.h"
+#include "raylib.h"
 
 //Constructor
 
-Minijuego::Minijuego(int numNaves, float radioBase, float radioNave, int vidas) : estado_juego(0), tiempoUltimoDisparo(0.0), modoGeneracionDisparosActivo(true), disparosGeneradosDebug(0){
-    num_vidas = (vidas > MAX_VIDAS) ? MAX_VIDAS : vidas;
-    numNaves = (numNaves > 15) ? MAX_NAVES : numNaves;  
+Minijuego::Minijuego(int numNaves, float radioBase, float radioNave) : estado_juego(0), municion(MUNICION){
+    num_naves = (numNaves > 15) ? MAX_NAVES : numNaves;
+    radio_base = (radioBase > MAX_R_BASE) ? MAX_R_BASE : radioBase;
+    radio_nave = (radioNave > MAX_R_NAVE) ? MAX_R_NAVE : radioNave;
 
     //Configurar la base
     float baseX = MAX_X / 2.0;
@@ -19,30 +21,12 @@ Minijuego::Minijuego(int numNaves, float radioBase, float radioNave, int vidas) 
     Vector2D velBase(0, 0);
     Vector2D acelBase(0, 0);
 
-    base = Particula(posBase, acelBase, velBase, radioBase, 2);
+    base = Particula(posBase, acelBase, velBase, radio_base, 2);
 
     disparos = ConjuntoParticulas();
     
     //Crear naves
-    naves = ConjuntoParticulas(numNaves);
-    float zonaSegura = MAX_Y - radioBase - 100; //Para evitar spawneo de naves muy cerca de base
-
-    for(int i = 0; i < numNaves; ++i){
-        Particula nave = naves.obtener(i);
-
-        //Ajustar valores de cada Partícula
-
-        Vector2D pos = nave.getPos();
-        float nuevaY = aleatorio(0, zonaSegura);
-        pos.setY(nuevaY);
-        nave.setPos(pos);
-
-        nave.setAcel(Vector2D(0, 0));
-        nave.setVel(Vector2D(nave.getVel().getX(), 0));
-        nave.setRadio(radioNave);
-
-        naves.reemplazar(nave, i);
-    }
+    inicializarNaves();
 }
 
 //Métodos privados
@@ -72,83 +56,123 @@ void Minijuego::crearDisparo(){
 }
 
 bool Minijuego::gestionaColisiones(){
-    bool colision_producida = false; // Bandera para saber si hubo alguna colisión
-
-    // Iteramos sobre todos los disparos (desde el final hacia el principio)
-    for (int i = disparos.getUtiles() - 1; i >= 0; --i) {
-        // Obtenemos el disparo actual
+    bool colision_producida = false;
+    for(int i = disparos.getUtiles() - 1; i >= 0; --i){
         const Particula& disparo_actual = disparos.obtener(i);
 
-        // Iteramos sobre todas las naves (desde el final hacia el principio)
-        // Para evitar 'break', usaremos una bandera local.
-        bool disparo_colisiono_con_nave = false; // Bandera para el bucle interno
+        bool disparo_colisiono_con_nave = false;
 
-        for (int j = naves.getUtiles() - 1; j >= 0 && !disparo_colisiono_con_nave; --j) {
+        for(int j = naves.getUtiles() - 1; j >= 0 && !disparo_colisiono_con_nave; --j){
             const Particula& nave_actual = naves.obtener(j);
-
-            // Usamos el método colision de la clase Particula
-            if (disparo_actual.colision(nave_actual)) {
-                // ¡COLISIÓN DETECTADA!
-
-                // 1. Eliminar el disparo
+            if(disparo_actual.colision(nave_actual)) {
                 disparos.borrar(i);
-
-                // 2. Eliminar la nave
                 naves.borrar(j);
 
-                colision_producida = true;         // Marcamos que hubo una colisión general
-                disparo_colisiono_con_nave = true; // Marcamos que este disparo ya colisionó
-                                                   // Esto hará que el bucle interno (de naves) termine
-                                                   // en la siguiente iteración para este disparo.
+                colision_producida = true;
+                disparo_colisiono_con_nave = true;
             }
         }
     }
-
     return colision_producida;
+}
+
+void Minijuego::inicializarNaves(){
+    naves = ConjuntoParticulas(getNumNaves());
+    float zonaSegura = MAX_Y - base.getRadio() - 100; //Para evitar spawneo de naves muy cerca de base
+
+    for(int i = 0; i < getNumNaves(); ++i){
+        Particula nave = naves.obtener(i);
+
+        //Ajustar valores de cada Partícula
+
+        Vector2D pos = nave.getPos();
+        float nuevaY = aleatorio(0, zonaSegura);
+        pos.setY(nuevaY);
+        nave.setPos(pos);
+
+        nave.setAcel(Vector2D(0, 0));
+        nave.setVel(Vector2D(nave.getVel().getX(), 0));
+        nave.setRadio(getRadioNave());
+
+        naves.reemplazar(nave, i);
+    }
+}
+
+void Minijuego::moverBase(int tecla){
+    float nuevaVel = 0.0;
+
+    if(tecla == KEY_LEFT)
+        nuevaVel = -MAX_VEL_BASE;
+    else if(tecla == KEY_RIGHT)
+        nuevaVel = MAX_VEL_BASE;
+
+    base.setVel(Vector2D(nuevaVel, 0.0));
+
+    //Tener en cuenta los límites
+    Vector2D posBase = base.getPos();
+    float radioBase = base.getRadio();
+
+    if(posBase.getX() - radioBase < 0){
+        base.setPos(Vector2D(radioBase, posBase.getY()));
+        base.setVel(Vector2D(0.0, 0.0));
+    }else if(posBase.getX() + radioBase > MAX_X){
+        base.setPos(Vector2D(MAX_X - radioBase, posBase.getY()));
+        base.setVel(Vector2D(0.0, 0.0));
+    }
 }
 
 //Otros métodos
 
-int Minijuego::step(int tecla){
-    moverNaves();
-    
-    return estado_juego;
-}
+int Minijuego::step(int tecla, float dt){
+    //Mover la base en función de la tecla
+    moverBase(tecla); 
+    base.mover();   
 
-////////////////////////////////////////////////////
-
-int Minijuego::step_debug(float dt){
-    moverNaves();
-    moverDisparos();
-
-    // Lógica para disparar automáticamente basada en el tiempo
-    tiempoUltimoDisparo += dt;
-    const float CADENCIA_DISPARO_DEBUG = 0.1f; // Más rápido para generar un buen volumen de prueba
-    const int MAX_DISPAROS_GENERADOS_DEBUG = 50; // Limite de disparos a generar para la prueba
-
-    // Solo genera disparos si estamos en modo de generación activa y no hemos alcanzado el límite
-    if (modoGeneracionDisparosActivo && disparosGeneradosDebug < MAX_DISPAROS_GENERADOS_DEBUG) {
-        if (tiempoUltimoDisparo >= CADENCIA_DISPARO_DEBUG) {
-            crearDisparo();
-            tiempoUltimoDisparo = 0.0f; 
-            disparosGeneradosDebug++; // Incrementa el contador de disparos generados para depuración
-            gestionaColisiones();
+    //Lógica de disparos
+    tiempo_ultimo_disparo += dt; 
+    if(tecla == KEY_SPACE && tiempo_ultimo_disparo >= CADENCIA){ //Limitar la velocidad entre disparos
+        if(municion > 0 && disparos.getUtiles() < MAX_DISPAROS_SIMUL){ //Si hay munición y no se supera la cantidad máxima simultánea
+            crearDisparo();        
+            municion--;                 
+            tiempo_ultimo_disparo = 0.0f; //Reiniciar
         }
-    } else if (modoGeneracionDisparosActivo && disparosGeneradosDebug >= MAX_DISPAROS_GENERADOS_DEBUG) {
-        // Una vez alcanzado el límite, desactiva la generación
-        modoGeneracionDisparosActivo = false;
-        // Opcional: Puedes imprimir un mensaje para saber cuándo se detiene la generación
-        // std::cout << "DEBUG: Generación de disparos detenida. Total generados: " << disparosGeneradosDebug << std::endl;
     }
 
+    //Movimiento de las partículas (naves y disparos)
+    moverNaves();
+    moverDisparos();
+    gestionaColisiones();
 
-    return estado_juego;
+    //Todas las naves destruidas
+    if(naves.getUtiles() == 0) 
+        estado_juego = 1; //Gana
+    //No hay munición y aún quedan naves
+    else if(municion <= 0)
+        estado_juego = -1; //Pierde
+
+    return estado_juego; 
 }
-
-////////////////////////////////////////////////////
 
 bool Minijuego::terminado() const{
     return estado_juego != 0;
+}
+
+void Minijuego::reiniciar(int num_naves){
+    estado_juego = 0;
+    num_naves = (num_naves > 15) ? MAX_NAVES : num_naves;
+
+    float baseX = MAX_X / 2.0;
+    float baseY = MAX_Y - 20.0;
+    Vector2D posBase(baseX, baseY);
+    Vector2D velBase(0, 0);
+    Vector2D acelBase(0, 0);
+
+    disparos.vaciar();
+    municion = MUNICION;
+    tiempo_ultimo_disparo = 0.0f;
+
+    //Crear naves
+    inicializarNaves();
 }
 
 //Get
@@ -170,10 +194,17 @@ const Particula& Minijuego::getBase() const{
 }
 
 int Minijuego::getNumNaves() const{
-    return naves.getUtiles();
+    return num_naves;
 }
 
 int Minijuego::getNumDisparos() const{
-    return disparos.getUtiles();
+    return municion;
 }
 
+float Minijuego::getRadioNave() const{
+    return radio_nave;
+}
+
+float Minijuego::getRadioBase() const{
+    return radio_base;
+}
