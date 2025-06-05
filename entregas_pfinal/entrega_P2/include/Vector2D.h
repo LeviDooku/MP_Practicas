@@ -95,6 +95,14 @@ public:
      * @return Datos del vector como string
      */
     std::string toString() const;
+
+    /**
+     * @brief Comparar si dos objetos de Vector2D son iguales
+     * @param v1 Primer objeto de Vector2D
+     * @param v2 Segundo objeto de Vector2D
+     * @return true si son iguales, false en caso contrario
+     */
+    bool operator==(const Vector2D &v1) const;
 };
 
 //Sobrecarga de operadores
@@ -114,13 +122,5 @@ std::ostream& operator<<(std::ostream &flujo, const Vector2D &v);
  * @return Referencia al flujo de entrada
  */
 std::istream& operator>>(std::istream &flujo, Vector2D &v);
-
-/**
- * @brief Comparar si dos objetos de Vector2D son iguales
- * @param v1 Primer objeto de Vector2D
- * @param v2 Segundo objeto de Vector2D
- * @return true si son iguales, false en caso contrario
- */
-bool operator==(const Vector2D &v1, const Vector2D &v2);
 
 #endif //VECTOR2D_H

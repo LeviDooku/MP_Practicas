@@ -58,7 +58,7 @@ Particula::Particula(const int tipoPart){
     }
 }
 
-Particula::Particula(const Vector2D &pos, const Vector2D &acel, const Vector2D &vel, const float radio, const int tipo)
+Particula::Particula(const Vector2D &pos, const Vector2D &vel, const Vector2D &acel, const float radio, const int tipo)
 : pos(pos.getX(), pos.getY()), 
   acel(acel.getX(), acel.getY()),
   veloc(vel.getX(), vel.getY()),
@@ -128,10 +128,7 @@ void Particula::rebotar(){
 }
 
 bool Particula::colision(const Particula &otra) const{
-    const float MARGEN_COLISION = 0.5; //Aumentar HitBox, para evitar tunneling
-    float radios_sum = radio + otra.getRadio() + MARGEN_COLISION;
-    return pos.distancia(otra.getPos()) <= radios_sum;
-    //return pos.distancia(otra.getPos()) <= radio + otra.getRadio();
+    return pos.distancia(otra.getPos()) <= radio + otra.getRadio();
 }
 
 void Particula::choque(Particula &otra){
@@ -154,6 +151,10 @@ void Particula::wrap(){
     if(lim_arriba(radio)) pos.setY(radio + epsilon);
 }
 
+float Particula::distancia(const Particula &p) const{
+    return getPos().distancia(p.getPos());
+}
+
 std::string Particula::toString() const{
     return "{ " + pos.toString() + ", " + veloc.toString() + ", " + acel.toString() + ", " + std::to_string(radio) + ", " + std::to_string(tipo) + " }";
 }
@@ -166,26 +167,32 @@ bool Particula::operator==(const Particula &p2) const{
 }
 
 std::ostream& operator<<(std::ostream &flujo, const Particula &p){
-    flujo << p.toString(); // ? Está bien usar toString()?
+    flujo << p.toString();
     return flujo;
 }
 
 std::istream& operator>>(std::istream &flujo, Particula &p){
-    std::string cabecera;
+    std::string str; // ? 
     char ll_izq, c1, c2, c3, c4, ll_dcha;
     Vector2D pos, vel, acel;
     float radio;
     int tipo;
+    
+    //Llave inicio
+    flujo >> ll_izq;
+    //Posición
+    flujo >> pos >> c1;
+    //Velocidad    
+    flujo >> vel >> c2;
+    //Aceleración
+    flujo >> acel >> c3;
+    //Radio y tipo
+    flujo >> radio >> c4 >> tipo;
+    //Llave final
+    flujo >> ll_dcha;
 
-    flujo >> cabecera >> ll_izq
-            >> pos >> c1
-            >> vel >> c2
-            >> acel >> c3
-            >> radio >> c4
-            >> tipo >> ll_dcha;
-
-    if(ll_izq == '{' && c1 == ',' && c2 == ',' && c3 == ',' && c4 == ',' && ll_dcha == '}') // ? Ta bien?
-        p = Particula(pos, acel, vel, radio, tipo);
+    if(c1 == ',' && c2 == ',' && c3 == ',' && c4 == ',' && ll_dcha == '}')
+        p = Particula(pos, vel, acel, radio, tipo);
     
     return flujo;
 }

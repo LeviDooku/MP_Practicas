@@ -82,7 +82,7 @@ void ConjuntoParticulas::reemplazar(const Particula &sustituta, int pos){
 
 void ConjuntoParticulas::mover(int tipo){
     for(int i = 0; i < utiles; ++i){
-        if(tipo == 0)
+        if(tipo == 0 || tipo != 1 || tipo != 2)
             set[i].mover();
         else if(tipo == 1){
             set[i].mover();
@@ -119,10 +119,6 @@ std::string ConjuntoParticulas::toString() const{
     }
     
     return result;
-}
-
-void ConjuntoParticulas::vaciar(){
-    utiles = 0;
 }
 
 //Sobrecarga de operadores
@@ -197,7 +193,7 @@ std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp){
     while(cp.getUtiles() > 0)
         cp.borrar(0);
 
-    for(int i = 0; i < cp.getCapacidad(); ++i){
+    for(int i = 0; i < numParticulas; ++i){
         std::string etiqueta;
         flujo >> etiqueta;
         
@@ -209,3 +205,4 @@ std::istream& operator>>(std::istream &flujo, ConjuntoParticulas &cp){
 
     return flujo;
 }
+
